@@ -33,12 +33,13 @@
 
 #### **Post Management**
 - [ ] `GET /posts`: Retrieve all posts.
-- [ ] `GET /posts/create`: Page to display form to create a new post.
-- [ ] `POST /posts/create`: Endpoint to create a new post.
-- [ ] `GET /posts/:PostId`: Retrieve a specific post by ID.
-- [ ] `GET /posts/:PostId/edit`: Page to display form to edit a post.
-- [ ] `POST /posts/:PostId/edit`: Endpoint to update post content.
-- [ ] `GET /posts/:PostId/delete`: Endpoint to delete a post.
+- [ ] `GET /users/:UserId/posts/create`: Show the create new post form for a specific user
+- [ ] `POST /users/:UserId/posts/create`: Create a new post for a specific user
+- [ ] `GET /users/:UserId/posts`: Retrieve all posts created by a specific user
+- [ ] `GET /posts/:PostId`: Retrieve a specific post by ID
+- [ ] `GET /posts/:PostId/edit`: Show the update post form
+- [ ] `POST /posts/:PostId/edit`: Update the post content
+- [ ] `GET /posts/:PostId/delete`: Delete a post
 
 #### **Tag Management**
 - [ ] `GET /tags`: Show all tags.
