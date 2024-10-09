@@ -34,11 +34,11 @@ Here are the available routes in the **WeBubble** application, categorized for e
   - **`POST /users/:UserId/profile/create`**: Create a new post for a specific user
 
 - **Update Profile:**
-  - **`GET /users/:UserId/profile/:profileId/edit`**: Show the update profile page
-  - **`POST /users/:UserId/profile/:profileId/edit`**: Update profile information
+  - **`GET /users/:UserId/profile/:ProfileId/edit`**: Show the update profile page
+  - **`POST /users/:UserId/profile/:ProfileId/edit`**: Update profile information
 
 - **View Profile:**
-  - **`GET /users/:UserId/profile/:profileId`**: Retrieve a specific user profile
+  - **`GET /users/:UserId/profile/:ProfileId`**: Retrieve a specific user profile
 
 ### **Idol and Manager Profiles**
 
@@ -50,12 +50,17 @@ Here are the available routes in the **WeBubble** application, categorized for e
 
 ### **Post Management**
 
-- **Create a New Post:**
-  - **`GET /posts/create`**: Show the create new post form
-  - **`POST /posts/create`**: Create a new post
-
-- **Retrieve Posts:**
+- **Retrieve All Posts:**
   - **`GET /posts`**: Retrieve all posts
+
+- **Create a New Post:**
+  - **`GET /users/:UserId/posts/create`**: Show the create new post form for a specific user
+  - **`POST /users/:UserId/posts/create`**: Create a new post for a specific user
+
+- **Retrieve All Posts by User:**
+  - **`GET /users/:UserId/posts`**: Retrieve all posts created by a specific user
+
+- **Retrieve a Specific Post:**
   - **`GET /posts/:PostId`**: Retrieve a specific post by ID
 
 - **Update Post:**

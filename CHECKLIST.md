@@ -1,5 +1,15 @@
-### **Checklist:**
+## **Checklist:**
 
+### **Progress**
+- [ ] Migration
+- [ ] Seeding
+- [ ] Routes
+- [ ] Auth
+- [ ] MVC
+- [ ] Package
+
+---
+### **Routes**
 #### **General**
 - [ ] `GET /`: Set up the landing page for the application.
 
