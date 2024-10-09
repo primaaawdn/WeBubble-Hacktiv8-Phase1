@@ -1,19 +1,22 @@
-const {
-	controller,
-    postController,
-	profileController,
-	userController,
-} = require("../controllers");
-
+const UserController = require("../controllers/userController");
 const router = require("express").Router();
 
-router.get("/");
-router.get("/login");
-router.post("/login");
-router.get("/logout");
+// router.get("/", UserController.landing);
+// router.get("/login");
+// router.post("/login");
+// router.get("/logout");
 
-router.get("/users/idols");
-router.get("/users/managers");
 
+// const userRoute = require('./userRoute');
+// const postRoute = require('./postRoute');
+// const profileRoute = require('./profileRoute');
+// const tagRoute = require('./tagRoute');
+
+// module.exports = {
+//   userRoute,
+//   postRoute,
+//   profileRoute,
+//   tagRoute
+// };
 
 module.exports = router;
