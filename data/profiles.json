@@ -5,7 +5,7 @@
 		"gender": "Female",
 		"bio": "Customer-focused cohesive local area network",
 		"group": "Nmixx",
-		"photo": "http://dummyimage.com/233x100.png/ff4444/ffffff",
+		"profilePicture": "http://dummyimage.com/233x100.png/ff4444/ffffff",
 		"joinedDate": "08/02/2004",
 		"UserId": 5
 	},
@@ -15,7 +15,7 @@
 		"gender": "Male",
 		"bio": "Future-proofed systemic framework",
 		"group": "Stray Kids",
-		"photo": "http://dummyimage.com/101x100.png/dddddd/000000",
+		"profilePicture": "http://dummyimage.com/101x100.png/dddddd/000000",
 		"joinedDate": "11/10/2012",
 		"UserId": 4
 	},
@@ -25,7 +25,7 @@
 		"gender": "Female",
 		"bio": "Vision-oriented non-volatile middleware",
 		"group": "Twice",
-		"photo": "http://dummyimage.com/186x100.png/cc0000/ffffff",
+		"profilePicture": "http://dummyimage.com/186x100.png/cc0000/ffffff",
 		"joinedDate": "10/08/2021",
 		"UserId": 1
 	},
@@ -35,7 +35,7 @@
 		"gender": "Male",
 		"bio": "Devolved intermediate matrix",
 		"group": "Xdinary Heroes",
-		"photo": "http://dummyimage.com/157x100.png/dddddd/000000",
+		"profilePicture": "http://dummyimage.com/157x100.png/dddddd/000000",
 		"joinedDate": "07/04/2012",
 		"UserId": 2
 	},
@@ -45,7 +45,7 @@
 		"gender": "Female",
 		"bio": "Cross-platform bottom-line analyzer",
 		"group": "Itzy",
-		"photo": "http://dummyimage.com/180x100.png/cc0000/ffffff",
+		"profilePicture": "http://dummyimage.com/180x100.png/cc0000/ffffff",
 		"joinedDate": "24/06/2019",
 		"UserId": 3
 	},
@@ -55,7 +55,7 @@
 		"gender": "Male",
 		"bio": "Cross-platform bottom-line analyzer",
 		"group": "Day6",
-		"photo": "http://dummyimage.com/180x100.png/cc0000/ffffff",
+		"profilePicture": "http://dummyimage.com/180x100.png/cc0000/ffffff",
 		"joinedDate": "13/09/2017",
 		"UserId": 7
 	},
@@ -65,7 +65,7 @@
 		"gender": "Female",
 		"bio": "Cross-platform bottom-line analyzer",
 		"group": "Xdinary Heroes",
-		"photo": "http://dummyimage.com/180x100.png/cc0000/ffffff",
+		"profilePicture": "http://dummyimage.com/180x100.png/cc0000/ffffff",
 		"joinedDate": "04/09/2021",
 		"UserId": 6
 	}

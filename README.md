@@ -118,7 +118,7 @@ READ
         GET /posts/:id - Retrieve a specific post by ID
 
         GET /tags - Retrieve all tags
-        GET /tags
+        GET /posts/tags - Filter all posts by tags
 
 UPDATE
 
