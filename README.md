@@ -19,7 +19,7 @@ The database consists of the following tables:
     - Stores information about the idols on the platform.
     - Fields:
       - `id`: Primary Key, unique identifier for each idol.
-      - `name`: Idol’s name.
+      - `username`: Username for login.
       - `email`: Idol’s email (used for login).
       - `password`: Encrypted password.
       - `role`: The role of the user, which can be 'idol' or 'fan'.
@@ -28,6 +28,7 @@ The database consists of the following tables:
     - Contains additional details about idols.
     - Fields:
       - `id`: Primary Key, unique identifier for the profile.
+      - `name`: Idol’s name.
       - `gender`: Gender of the idol.
       - `bio`: A short biography.
       - `agency`: The idol's management agency.

@@ -1,6 +1,7 @@
 [
 	{
 		"id": 1,
+        "name": "Patton Evitts",
 		"gender": "Male",
 		"bio": "Customer-focused cohesive local area network",
 		"agency": "JYP",
@@ -10,6 +11,7 @@
 	},
 	{
 		"id": 2,
+        "name": "Abagael Danaher",
 		"gender": "Female",
 		"bio": "Future-proofed systemic framework",
 		"agency": "SM",
@@ -19,6 +21,7 @@
 	},
 	{
 		"id": 3,
+        "name": "Vernon Woodthorpe",
 		"gender": "Male",
 		"bio": "Vision-oriented non-volatile middleware",
 		"agency": "SM",
@@ -28,6 +31,7 @@
 	},
 	{
 		"id": 4,
+        "name": "Max Lipyeat",
 		"gender": "Male",
 		"bio": "Devolved intermediate matrix",
 		"agency": "YG",
@@ -37,6 +41,7 @@
 	},
 	{
 		"id": 5,
+        "name": "Kellen Garrit",
 		"gender": "Female",
 		"bio": "Cross-platform bottom-line analyzer",
 		"agency": "HYBE",
