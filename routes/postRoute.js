@@ -1,6 +1,8 @@
+const PostController = require("../controllers/postController");
+
 const router = require("express").Router();
 
-// router.get("/posts");
+router.get("/posts", PostController.getPost);
 // router.get("/users/:UserId/posts");
 // router.get("/users/:UserId/posts/create");
 // router.post("/users/:UserId/posts/create");

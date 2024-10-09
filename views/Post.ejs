@@ -1,0 +1,38 @@
+<%- include('partials/header') %> <%- include('partials/navbar') %>
+<style>
+	body {
+		background-color: #ffffff;
+	}
+	.card {
+		background-color: white;
+	}
+	.card-text {
+		color: #333;
+	}
+</style>
+
+<div class="container my-4">
+	<h2 class="text-center mb-4">All Posts</h2>
+	<div class="row">
+		<% dataPost.forEach(post => { %>
+		<div class="col-md-4 mb-4">
+			<div class="card shadow-sm" style="border: none">
+				<% if (post.imageUrl) { %>
+				<img src="<%= post.imageUrl %>" class="card-img-top" alt="Post Image" />
+				<% } %>
+				<div class="card-body">
+					<p class="card-text"><%= post.content %></p>
+					<p class="card-text">
+						<small class="text-muted">
+							Posted by <%= post.User.Profile.name %> | <%= new
+							Date(post.createdAt).toLocaleDateString() %>
+						</small>
+					</p>
+				</div>
+			</div>
+		</div>
+		<% }) %>
+	</div>
+</div>
+
+<%- include('partials/footer') %>
