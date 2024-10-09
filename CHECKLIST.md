@@ -13,6 +13,7 @@
 - [ ] Static method di model
 - [ ] Validasi & custom error handling
 - [ ] Hooks
+- [ ] Helper
 - [ ] Package
 
 ---
