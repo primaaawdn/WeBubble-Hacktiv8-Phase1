@@ -1,0 +1,47 @@
+[
+	{
+		"id": 1,
+		"gender": "Male",
+		"bio": "Customer-focused cohesive local area network",
+		"agency": "JYP",
+		"photo": "http://dummyimage.com/233x100.png/ff4444/ffffff",
+		"debutDate": 2007,
+		"IdolId": 5
+	},
+	{
+		"id": 2,
+		"gender": "Female",
+		"bio": "Future-proofed systemic framework",
+		"agency": "SM",
+		"photo": "http://dummyimage.com/101x100.png/dddddd/000000",
+		"debutDate": 2001,
+		"IdolId": 4
+	},
+	{
+		"id": 3,
+		"gender": "Male",
+		"bio": "Vision-oriented non-volatile middleware",
+		"agency": "SM",
+		"photo": "http://dummyimage.com/186x100.png/cc0000/ffffff",
+		"debutDate": 1997,
+		"IdolId": 1
+	},
+	{
+		"id": 4,
+		"gender": "Male",
+		"bio": "Devolved intermediate matrix",
+		"agency": "YG",
+		"photo": "http://dummyimage.com/157x100.png/dddddd/000000",
+		"debutDate": 2003,
+		"IdolId": 2
+	},
+	{
+		"id": 5,
+		"gender": "Female",
+		"bio": "Cross-platform bottom-line analyzer",
+		"agency": "HYBE",
+		"photo": "http://dummyimage.com/180x100.png/cc0000/ffffff",
+		"debutDate": 2009,
+		"IdolId": 3
+	}
+]

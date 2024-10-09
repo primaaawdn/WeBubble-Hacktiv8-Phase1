@@ -22,7 +22,6 @@ The database consists of the following tables:
       - `name`: Idol’s name.
       - `email`: Idol’s email (used for login).
       - `password`: Encrypted password.
-      - `profile`: Profile description or image.
       - `role`: The role of the user, which can be 'idol' or 'fan'.
 
 2. **Profiles**

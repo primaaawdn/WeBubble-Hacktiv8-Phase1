@@ -1,0 +1,39 @@
+[
+	{
+		"id": 1,
+		"name": "Patton Evitts",
+		"email": "pevitts0@umn.edu",
+		"password": "qeydsV4f",
+		"role": "idol"
+
+	},
+	{
+		"id": 2,
+		"name": "Vernon Woodthorpe",
+		"email": "vwoodthorpe1@sitemeter.com",
+		"password": "lgevdgU",
+		"role": "idol"
+    	},
+	{
+		"id": 3,
+		"name": "Max Lipyeat",
+		"email": "mlipyeat2@walmart.com",
+		"password": "mhlzr,>YOL",
+		"role": "idol"
+	},
+	{
+		"id": 4,
+		"name": "Kellen Garrit",
+		"email": "kgarrit3@msu.edu",
+		"password": "ihqmog~Hkr",
+		"role": "idol"
+
+	},
+	{
+		"id": 5,
+		"name": "Abagael Danaher",
+		"email": "adanaher4@t.co",
+		"password": "dxvtaKeQ!",
+		"role": "idol"
+    }
+]
