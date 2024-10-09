@@ -1,0 +1,1 @@
+const { User, Profile, Tag, Post, PostTag } = require("./models");

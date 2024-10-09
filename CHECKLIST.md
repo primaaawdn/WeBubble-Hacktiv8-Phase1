@@ -2,11 +2,11 @@
 
 ### **Progress**
 
-- [ ] ERD
-- [ ] Model & Migration
-- [ ] Tambahan Migration
-- [ ] Seeding
-- [ ] Routes
+- [x] ERD
+- [x] Model & Migration
+- [x] Tambahan Migration
+- [x] Seeding
+- [x] Routes
 - [ ] Auth
 - [ ] MVC
 - [ ] Fitur search
