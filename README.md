@@ -33,7 +33,7 @@ The database consists of the following tables:
       - `bio`: A short biography.
       - `agency`: The idol's management agency.
       - `photo`: URL to the idol's profile picture.
-      - `debutDate`: The idol’s debut date.
+      - `debutYear`: The idol’s debut year.
       - `IdolId`: Foreign Key referencing the `Idols` table.
 
 3. **Posts**
