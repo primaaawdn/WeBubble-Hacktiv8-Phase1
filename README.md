@@ -100,38 +100,65 @@ Ensure you complete the following tasks for a successful setup:
 
 The following are the key routes available in the WeBubble application:
 
-    Idols:
-        GET /api/idols - Retrieve all idols
-        POST /api/idols - Create a new idol
-        GET /api/idols/:id - Retrieve a specific idol by ID
-        PUT /api/idols/:id - Update idol information
-        DELETE /api/idols/:id - Delete an idol
+CRUD
 
-    Profiles:
-        GET /api/profiles - Retrieve all idol profiles
-        POST /api/profiles - Create a new idol profile
+CREATE
+        GET /users/:id/create - Create an account
+        POST /users/:id/create - Create an account
+
+        GET /posts/create - Create a new post
+        POST /posts/create - Create a new post
+
+READ
+        GET /users/idols - Retrieve all idols profile
+        GET /users/managers - Retrieve all managers profiles
+        GET /users/:id/profile - Retrieve a specific profile ID
+
+        GET /posts - Retrieve all posts
+        GET /posts/:id - Retrieve a specific post by ID
+
+        GET /tags - Retrieve all tags
+        GET /tags
+
+UPDATE
+
+        GET /posts/:id/edit - Update post content
+        POST /posts/:id/edit - Update post content
+
+DELETE
+        GET /users/:id/delete - Delete an account
+        DELETE /posts/:id/delete - Delete a post
+
+
+
+
+
+
+        GET /users/:id/delete - Delete an account
+        GET /users/:id/delete - Delete an account
+
+
+        GET /users/:id/profile/idols - Retrieve a specific idol by ID - profiles
+
+        GET /users/:id/idols/edit - Update idol information
+        POST /users/idols/:id/edit - Update idol information
+
+    Idols:
+    Managers:
+        POST /users/profiles - Create a new idol profile
         GET /api/profiles/:id - Retrieve a specific profile by ID
         PUT /api/profiles/:id - Update profile information
         DELETE /api/profiles/:id - Delete a profile
 
     Posts:
-        GET /api/posts - Retrieve all posts
-        POST /api/posts - Create a new post
-        GET /api/posts/:id - Retrieve a specific post by ID
-        PUT /api/posts/:id - Update post content
-        DELETE /api/posts/:id - Delete a post
+        
+        
+        
+
+        
 
     Tags:
-        GET /api/tags - Retrieve all tags
-        POST /api/tags - Create a new tag
-        GET /api/tags/:id - Retrieve a specific tag by ID
-        PUT /api/tags/:id - Update tag information
-        DELETE /api/tags/:id - Delete a tag
-
-    PostTags:
-        GET /api/posttags - Retrieve all post-tag relationships
-        POST /api/posttags - Create a new post-tag relationship
-        DELETE /api/posttags/:id - Delete a post-tag relationship
+        
 
 ---
 
