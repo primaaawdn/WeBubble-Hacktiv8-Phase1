@@ -13,14 +13,19 @@ Here are the available routes in the **WeBubble** application, categorized for e
 ### **General**
 
 - **`GET /`**: Landing Page / Home
+- **`GET /login`**: This route serves the login page where users can enter their email and password.
+- **`POST /login`**: This route serves the login page where users can enter their email and password.
+- **`GET /logout`**: Logout functionality.
 
 ### **User Account Management**
 
 - **Create an Account:**
+
   - **`GET /users/create`**: Show the create account page
   - **`POST /users/create`**: Create a new account
 
 - **Update Account:**
+
   - **`GET /users/:UserId/edit`**: Show the update profile page
   - **`POST /users/:UserId/edit`**: Update profile information
 
@@ -30,10 +35,12 @@ Here are the available routes in the **WeBubble** application, categorized for e
 ### **Profile Management**
 
 - **Create Profile Post:**
+
   - **`GET /users/:UserId/profile/create`**: Show the create new post form for a specific user
   - **`POST /users/:UserId/profile/create`**: Create a new post for a specific user
 
 - **Update Profile:**
+
   - **`GET /users/:UserId/profile/:ProfileId/edit`**: Show the update profile page
   - **`POST /users/:UserId/profile/:ProfileId/edit`**: Update profile information
 
@@ -43,6 +50,7 @@ Here are the available routes in the **WeBubble** application, categorized for e
 ### **Idol and Manager Profiles**
 
 - **Retrieve Idol Profiles:**
+
   - **`GET /users/idols`**: Retrieve all idol profiles
 
 - **Retrieve Manager Profiles:**
@@ -51,19 +59,24 @@ Here are the available routes in the **WeBubble** application, categorized for e
 ### **Post Management**
 
 - **Retrieve All Posts:**
+
   - **`GET /posts`**: Retrieve all posts
 
 - **Create a New Post:**
+
   - **`GET /users/:UserId/posts/create`**: Show the create new post form for a specific user
   - **`POST /users/:UserId/posts/create`**: Create a new post for a specific user
 
 - **Retrieve All Posts by User:**
+
   - **`GET /users/:UserId/posts`**: Retrieve all posts created by a specific user
 
 - **Retrieve a Specific Post:**
+
   - **`GET /posts/:PostId`**: Retrieve a specific post by ID
 
 - **Update Post:**
+
   - **`GET /posts/:PostId/edit`**: Show the update post form
   - **`POST /posts/:PostId/edit`**: Update the post content
 
@@ -73,9 +86,11 @@ Here are the available routes in the **WeBubble** application, categorized for e
 ### **Tag Management**
 
 - **Show Tags:**
+
   - **`GET /tags`**: Show all tags
 
 - **Filter Posts by Tags:**
+
   - **`GET /posts/tags/:TagId`**: Retrieve all posts filtered by a specific tag
 
 - **Delete Tag:**
