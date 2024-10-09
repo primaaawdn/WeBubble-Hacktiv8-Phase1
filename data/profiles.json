@@ -1,52 +1,72 @@
 [
 	{
 		"id": 1,
-        "name": "Patton Evitts",
-		"gender": "Male",
+		"name": "Lily Jin Park Morrow",
+		"gender": "Female",
 		"bio": "Customer-focused cohesive local area network",
-		"agency": "JYP",
+		"group": "Nmixx",
 		"photo": "http://dummyimage.com/233x100.png/ff4444/ffffff",
-		"debutYear": 2007,
-		"IdolId": 5
+		"joinedDate": "08/02/2004",
+		"UserId": 5
 	},
 	{
 		"id": 2,
-        "name": "Abagael Danaher",
-		"gender": "Female",
+		"name": "Hwang Hyunjin",
+		"gender": "Male",
 		"bio": "Future-proofed systemic framework",
-		"agency": "SM",
+		"group": "Stray Kids",
 		"photo": "http://dummyimage.com/101x100.png/dddddd/000000",
-		"debutYear": 2001,
-		"IdolId": 4
+		"joinedDate": "11/10/2012",
+		"UserId": 4
 	},
 	{
 		"id": 3,
-        "name": "Vernon Woodthorpe",
-		"gender": "Male",
+		"name": "Hirai Momo",
+		"gender": "Female",
 		"bio": "Vision-oriented non-volatile middleware",
-		"agency": "SM",
+		"group": "Twice",
 		"photo": "http://dummyimage.com/186x100.png/cc0000/ffffff",
-		"debutYear": 1997,
-		"IdolId": 1
+		"joinedDate": "10/08/2021",
+		"UserId": 1
 	},
 	{
 		"id": 4,
-        "name": "Max Lipyeat",
+		"name": "Kwak Jiseok",
 		"gender": "Male",
 		"bio": "Devolved intermediate matrix",
-		"agency": "YG",
+		"group": "Xdinary Heroes",
 		"photo": "http://dummyimage.com/157x100.png/dddddd/000000",
-		"debutYear": 2003,
-		"IdolId": 2
+		"joinedDate": "07/04/2012",
+		"UserId": 2
 	},
 	{
 		"id": 5,
-        "name": "Kellen Garrit",
+		"name": "Choi Jisu",
 		"gender": "Female",
 		"bio": "Cross-platform bottom-line analyzer",
-		"agency": "HYBE",
+		"group": "Itzy",
 		"photo": "http://dummyimage.com/180x100.png/cc0000/ffffff",
-		"debutYear": 2009,
-		"IdolId": 3
+		"joinedDate": "24/06/2019",
+		"UserId": 3
+	},
+	{
+		"id": 6,
+		"name": "Yoon Dowoon",
+		"gender": "Male",
+		"bio": "Cross-platform bottom-line analyzer",
+		"group": "Day6",
+		"photo": "http://dummyimage.com/180x100.png/cc0000/ffffff",
+		"joinedDate": "13/09/2017",
+		"UserId": 7
+	},
+	{
+		"id": 7,
+		"name": "Qila",
+		"gender": "Female",
+		"bio": "Cross-platform bottom-line analyzer",
+		"group": "Xdinary Heroes",
+		"photo": "http://dummyimage.com/180x100.png/cc0000/ffffff",
+		"joinedDate": "04/09/2021",
+		"UserId": 6
 	}
 ]
