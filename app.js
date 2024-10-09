@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const port = 3000;
+const session = require('express-session');
 
 const userRoute = require('./routes/userRoute');
 const postRoute = require('./routes/postRoute');
@@ -16,6 +17,12 @@ app.use(userRoute);
 app.use(postRoute);
 app.use(profileRoute);
 app.use(tagRoute);
+app.use(session({
+    secret: 'yourSecretKey',
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: false }
+}));
 
 // app.use('/', index);
 // app.use('/posts', postRoute);
