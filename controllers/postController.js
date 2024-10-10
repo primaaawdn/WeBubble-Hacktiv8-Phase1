@@ -16,15 +16,20 @@ class PostController {
 						}]
 					}
 				],
-                order: [['createdAt', 'DESC']],
+				order: [['createdAt', 'DESC']],
 			});
+<<<<<<< HEAD
 			// res.send({dataPost});
 		
 			res.render("Post", { dataPost, userId: userId || null });
+=======
+			res.render("Post", { dataPost, csrfToken: req.csrfToken() });
+>>>>>>> a539526e312dbf091bf89709e42846348abc5fad
 		} catch (error) {
-            res.send(error.message);
-        }
+			res.send(error.message);
+		}
 	}
+<<<<<<< HEAD
 
 	static async ViewPost(req, res) {
 		const {UserId} = req.params
@@ -74,6 +79,9 @@ class PostController {
       res.send(error.message);
     }
 	}
+=======
+	
+>>>>>>> a539526e312dbf091bf89709e42846348abc5fad
 }
 
 module.exports = PostController;

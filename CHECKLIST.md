@@ -8,11 +8,11 @@
 - [x] Seeding
 - [x] Routes
 - [ ] Auth
-- [ ] MVC
-- [ ] Fitur search
+- [x] MVC
+- [x] Fitur search
 - [ ] Static method di model
 - [ ] Validasi & custom error handling
-- [ ] Hooks
+- [x] Hooks
 - [ ] Helper
 - [ ] Package
 
@@ -22,35 +22,32 @@
 
 #### **General**
 
-- [ ] `GET /`: Landing Page / Home
-- [ ] `GET /login`: Login page.
-- [ ] `POST /login`: This route serves the login page where users can enter their email and password.
-- [ ] `GET /logout`: Logout functionality.
+- [x] `GET /`: Landing Page / Home
+- [x] `GET /login`: Login page.
+- [x] `POST /login`: This route serves the login page where users can enter their email and password.
+- [x] `GET /logout`: Logout functionality.
 
 #### **User Account Management**
 
-- [ ] `GET /users/create`: Register page.
-- [ ] `POST /users/create`: Endpoint to create a new account.
-- [ ] `GET /users/:UserId/edit`: Page to show the user profile update form.
-- [ ] `POST /users/:UserId/edit`: Endpoint to update user profile information.
-- [ ] `GET /users/:UserId/delete`: Endpoint to delete a user account.
+- [x] `GET /users/create`: Register page.
+- [x] `POST /users/create`: Endpoint to create a new account.
 
 #### **Profile Management**
 
-- [ ] `GET /users/:UserId/profile/create`: Page to display form to create a new profile post.
+- [ ] `GET /users/:UserId/profile/create`: Page to display form to create a new profile.
 - [ ] `POST /users/:UserId/profile/create`: Endpoint to create a new post for a user.
-- [ ] `GET /users/:UserId/profile/:profileId`: Endpoint to retrieve a specific user profile.
+- [] `GET /users/:UserId/profile/:profileId`: Endpoint to retrieve a specific user profile.
 - [ ] `GET /users/:UserId/profile/:profileId/edit`: Page to display the form to update a profile.
 - [ ] `POST /users/:UserId/profile/:profileId/edit`: Endpoint to update the profile content.
 
 #### **Idol and Manager Profiles**
 
-- [ ] `GET /users/idols`: Retrieve all idol profiles.
-- [ ] `GET /users/managers`: Retrieve all manager profiles.
+- [x] `GET /users/idols`: Retrieve all idol profiles.
+- [x] `GET /users/managers`: Retrieve all manager profiles.
 
 #### **Post Management**
 
-- [ ] `GET /posts`: Retrieve all posts.
+- [x] `GET /posts`: Retrieve all posts.
 - [ ] `GET /users/:UserId/posts/create`: Show the create new post form for a specific user
 - [ ] `POST /users/:UserId/posts/create`: Create a new post for a specific user
 - [ ] `GET /users/:UserId/posts`: Retrieve all posts created by a specific user
