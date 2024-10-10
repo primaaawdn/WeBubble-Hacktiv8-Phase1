@@ -1,6 +1,7 @@
 const express = require("express");
 const session = require('express-session');
 const csrf = require("csurf");
+const cookieParser = require("cookie-parser");
 
 const app = express();
 const port = 3000;
@@ -19,19 +20,19 @@ app.use(express.urlencoded({ extended: true }));
 
 // Setup session
 app.use(session({
-    secret: 'yourSecretKey',
+    secret: process.env.SESSION_SECRET || 'yourSecretKey', // Use env variable
     resave: false,
     saveUninitialized: true,
-    cookie: { secure: false } // Ubah menjadi true jika menggunakan HTTPS
+    cookie: { secure: true } // Set to true in production with HTTPS
 }));
 
 // Setup CSRF protection
 const csrfProtection = csrf({ cookie: { httpOnly: true } });
 app.use(csrfProtection);
 
-// Middleware untuk menambahkan token CSRF ke response
+// Middleware for adding CSRF token to response
 app.use((req, res, next) => {
-    res.locals.csrfToken = req.csrfToken(); // Menyimpan token CSRF di locals
+    res.locals.csrfToken = req.csrfToken(); // Store token in locals
     next();
 });
 
@@ -42,17 +43,29 @@ app.use(postRoute);
 app.use(profileRoute);
 app.use(tagRoute);
 
-// Contoh rute yang menggunakan CSRF token
+// Example route that uses CSRF token
 app.get('/form', (req, res) => {
-    res.render('form', { csrfToken: res.locals.csrfToken }); // Kirim token ke view
+    res.render('form', { csrfToken: res.locals.csrfToken }); // Send token to view
 });
 
-// Error handling untuk CSRF
+// Route to handle form submission
+app.post('/submit-form', (req, res) => {
+    // Logic to handle form data
+    res.send("Form submitted successfully!");
+});
+
+// CSRF error handling
 app.use((err, req, res, next) => {
     if (err.code === 'EBADCSRF') {
         return res.status(403).send('Invalid CSRF token');
     }
     next(err);
+});
+
+// General error handling
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).send('Something broke!');
 });
 
 // Start the server
