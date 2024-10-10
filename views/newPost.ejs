@@ -5,7 +5,7 @@
 
 <p>Are you ready to tell your stories, <%= userData.username %>?</p>
 
-<form action="/users/<%= userData.id %>/posts/create" method="post">
+<form action="/users/<%= userData.id %>/posts/create" method="post" enctype="multipart/form-data">
 
   <div class="form-group">
     <label for="exampleFormControlTextarea1">Write your stories here~</label>
@@ -13,7 +13,7 @@
   </div>
   <br><br>
 
-  <input class="form-control" type="text" placeholder="picture" name="imageUrl">
+  <input class="form-control" type="file" name="imageUrl">
   <br><br>
 
   <button class="btn btn-primary" type="submit">Post it</button>

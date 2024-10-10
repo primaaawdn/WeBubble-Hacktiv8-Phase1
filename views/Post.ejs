@@ -1,19 +1,29 @@
 <%- include('partials/Header') %>
 <%- include('partials/NavBar') %>
+
 <style>
-	body {
-		background-color: #ffffff;
-	}
-	.card {
-		background-color: white;
-	}
-	.card-text {
-		color: #333;
-	}
+    body {
+        background-color: #ffffff;
+    }
+    .card {
+        background-color: white;
+        height: 100%;
+    }
+    .card-text {
+        color: #333;
+    }
+    .card-body {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between; 
+    }
+    .card-img-top {
+        height: 200px; 
+        object-fit: cover;
+    }
 </style>
 
 <a href="/posts/YourPost/<%= userId %>">Your Post</a>
-
 <a href="/users/<%= userId %>/posts/create">Add new Post</a>
 
 <div class="container my-4">
@@ -30,17 +40,21 @@
                     <% if(post.User && post.User.Profile) { %>
                         <p class="card-text">
                             <small class="text-muted">
-                                Posted by <%= post.User.Profile.name %> | <%= formattedDate(post.createdAt) %>
+                                Posted by <%= post.User.Profile.name %> <br>
+								<%= formattedDate(post.createdAt) %>
                             </small>
                         </p>
                     <% } %>
-                    
-                    <a href="/posts/<%= post.id %>"> <button> Detail Post</button></a>
+                    <a href="/posts/<%= post.id %>">
+                        <button class="btn btn-primary">Detail Post</button>
+                    </a>
                 </div>
             </div>
         </div>
         <% }) %>
     </div>
+
+    <h6><strong>Total Posts:</strong> <%= totalPosts %></h6>
 </div>
 
 <%- include('partials/Footer') %>

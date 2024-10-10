@@ -6,6 +6,7 @@
     <p><%= dataPost.content %></p>
     <img src="<%= dataPost.imageUrl %>" alt="Post Image" />
     <p><small>Posted on <%= formattedDate(dataPost.createdAt) %></small></p>
+    <p>Word Count: <%= dataPost.wordCount %></p>
 </div>
 
 <%- include('partials/Footer') %>
