@@ -8,7 +8,7 @@
 - [x] Seeding
 - [x] Routes
 - [ ] Auth
-- [ ] MVC
+- [x] MVC
 - [x] Fitur search
 - [ ] Static method di model
 - [ ] Validasi & custom error handling
