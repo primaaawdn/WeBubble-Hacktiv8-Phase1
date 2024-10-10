@@ -1,22 +1,9 @@
-const UserController = require("../controllers/userController");
+const Controller = require("../controllers/controller");
 const router = require("express").Router();
 
-// router.get("/", UserController.landing);
-// router.get("/login");
-// router.post("/login");
-// router.get("/logout");
-
-
-// const userRoute = require('./userRoute');
-// const postRoute = require('./postRoute');
-// const profileRoute = require('./profileRoute');
-// const tagRoute = require('./tagRoute');
-
-// module.exports = {
-//   userRoute,
-//   postRoute,
-//   profileRoute,
-//   tagRoute
-// };
+router.get("/", Controller.landing);
+router.get("/login", Controller.loginPage);
+router.post("/login", Controller.login);
+router.get("/logout", Controller.logout);
 
 module.exports = router;

@@ -1,0 +1,48 @@
+<%- include('partials/Header') %>
+<%- include('partials/NavBar') %>
+
+<div class="container my-4">
+    <h2 class="mb-4">Talents and Managers</h2>
+
+    <div class="d-flex justify-content-start mb-4">
+        <form action="/users" method="GET" class="form-inline">
+            <select name="role" class="form-control mr-2" onchange="this.form.submit()">
+                <option value="">All</option>
+                <option value="idol" <%= role === 'idol' ? 'selected' : '' %>>Idol</option>
+                <option value="manager" <%= role === 'manager' ? 'selected' : '' %>>Manager</option>
+            </select>
+        </form>
+
+        <form action="/users" method="GET" class="form-inline mr-3">
+            <div class="input-group">
+                <input type="text" name="search" placeholder="Search Users..." class="form-control">
+                <div class="input-group-append">
+                    <button type="submit" class="btn btn-primary">Search</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    
+    <div class="row justify-content-start mx-auto" style="max-width: 900px;">
+        <% dataUser.forEach(user => { %>
+            <div class="col-md-4 mb-3">
+                <div class="card shadow-sm d-flex align-items-center p-2" style="flex-direction: row; border: none;">
+                    <% if (user.profilePicture) { %>
+                        <img src="<%= user.profilePicture %>" class="rounded-circle" alt="Profile Picture" style="width: 75px; height: 75px; object-fit: cover; margin-right: 15px;">
+                    <% } else { %>
+                        <img src="/images/default-profile.png" class="rounded-circle" alt="Default Profile Picture" style="width: 75px; height: 75px; object-fit: cover; margin-right: 15px;">
+                    <% } %>
+                    <div class="flex-grow-1">
+                        <h5 class="mb-1 text-truncate" style="max-width: 200px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                            <%= user.name %>
+                        </h5>
+                        <p class="mb-1"><%= user.group %></p>
+                        <a href="/users/<%= user.UserId %>/profile/<%= user.id %>" class="btn btn-outline-info btn-sm px-1 py-0" style="font-size: 0.7rem;">Detail</a>
+                    </div>
+                </div>
+            </div>
+        <% }) %>
+    </div>
+</div>
+
+<%- include('partials/Footer') %>
