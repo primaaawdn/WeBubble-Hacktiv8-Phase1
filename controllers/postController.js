@@ -14,14 +14,14 @@ class PostController {
 						}]
 					}
 				],
-                order: [['createdAt', 'DESC']],
+				order: [['createdAt', 'DESC']],
 			});
-			// res.send(dataPost);
-			res.render("Post", { dataPost });
+			res.render("Post", { dataPost, csrfToken: req.csrfToken() });
 		} catch (error) {
-            res.send(error.message);
-        }
+			res.send(error.message);
+		}
 	}
+	
 }
 
 module.exports = PostController;
