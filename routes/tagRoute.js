@@ -1,4 +1,6 @@
+const TagController = require("../controllers/tagController");
 const router = require("express").Router();
+
 
 router.use(function(req, res, next){
   if(!req.session.userId){
@@ -9,7 +11,9 @@ router.use(function(req, res, next){
   }
 })
 
-// router.get("/tags");
+router.post("/tags", TagController.getTag)
+router.post("/posts/:PostId/tag", TagController.addNewTag);
+
 // router.get("/posts/tags/:TagId");
 // router.get("/tags/:TagId/delete");
 

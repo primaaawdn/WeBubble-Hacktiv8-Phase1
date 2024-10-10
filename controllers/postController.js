@@ -1,5 +1,6 @@
 const { validationResult } = require("express-validator");
-const { Post, User, Profile, sequelize } = require("../models");
+const { Post, User, Profile, Tag, PostTag, sequelize } = require("../models");
+const { includes } = require("../validations/login.validation");
 
 class PostController {
 	static async getPost(req, res) {
@@ -12,12 +13,21 @@ class PostController {
 						attributes: ["username"],
 						include: [
 							{
-								model: Profile,
+								model: Profile, 
 								attributes: ["name"],
 							},
+						// 	{
+						// 		model: PostTag,
+						// 		include: [{
+						// 				model: Tag,
+						// 				attributes: ['tag']
+						// 		}]
+						// }
 						],
 					},
 				],
+				
+
 				order: [["createdAt", "DESC"]],
 			});
 			res.render("Post", { dataPost, userId });

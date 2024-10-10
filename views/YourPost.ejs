@@ -14,6 +14,8 @@
 
 <div class="container my-4">
 	<h2 class="text-center mb-4">All Posts</h2>
+  <a href="/users/<%= UserId %>/posts/create">Add new Post</a>
+  <br> <br>
 	<div class="row">
 		<% dataPost.forEach(post => { %>
 		<div class="col-md-4 mb-4">
@@ -39,6 +41,7 @@
 		</div>
 		<% }) %>
 	</div>
+  
 </div>
 
 <%- include('partials/Footer') %>
