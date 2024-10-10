@@ -1,0 +1,21 @@
+<%- include('partials/Header') %>
+<%- include('partials/NavBar') %>
+
+<br><br>
+
+
+<form action="/posts/YourPost/<%= userData.UserId %>/<%= userData.id %>/edit" method="post">
+
+  <div class="form-group">
+    <label for="exampleFormControlTextarea1">Edit your story here!</label>
+    <textarea name="content" class="form-control" id="exampleFormControlTextarea1" rows="3"><%= userData.content %></textarea>
+  </div>
+  <br><br>
+
+  <input class="form-control" type="text" placeholder="picture" name="imageUrl" value="<%= userData.imageUrl  %>">
+  <br><br>
+
+  <button class="btn btn-primary" type="submit">Post it</button>
+</form>
+
+<%- include('partials/footer') %>

@@ -22,7 +22,7 @@ class PostController {
 			});
 			res.render("Post", { dataPost, userId });
 		} catch (error) {
-			res.send(error.message);
+			res.send(error);
 		}
 	}
 	static async ViewPost(req, res) {
@@ -52,9 +52,6 @@ class PostController {
 	static async createPost(req, res) {
     const userId = req.session.userId; 
     try {
-        if (!userId) {
-            return res.status(401).send('User not logged in'); // Jika user tidak login
-        }
         const userData = await User.findOne({
             where: { id: userId }
         });
@@ -63,26 +60,83 @@ class PostController {
             return res.status(404).send('User not found'); 
         }
         // res.send({ userData }); 
-        res.render('newPost', { userData }); // Menggunakan data untuk merender halaman
+        res.render('newPost', { userData }); 
     } catch (error) {
-        res.status(500).send(error.message); // Menangani error dengan status 500
+        res.status(500).send(error.message); 
     }
 }
-
 
 	static async postNewPost(req, res) {
 		const {content, imageUrl} = req.body
 		const userId = req.session.userId
 		try {
-			if (!userId) {
-				return res.status(401).send('User not logged in'); // Jika user tidak login
-			}
 			await Post.create({UserId: userId, content, imageUrl})
 			res.redirect('/posts');
 		} catch (error) {
 			res.send(error.message);
 		}
 	}
+
+	static async YourPost(req, res) {
+		const userId = req.session.userId
+		try {
+			const dataPost = await Post.findAll({
+				where: { UserId: userId },
+				order: [['createdAt', 'DESC']], 
+		});
+			res.render('YourPost', {UserId: userId, dataPost})	
+			// res.send({UserId: userId, dataPost})
+		} catch (error) {
+			res.send(error.message)
+		}
+	}
+
+	static async getEdit(req, res) {
+    
+		const PostId = req.params.PostId
+    try {
+        const userData = await Post.findByPk(PostId);
+        // res.send({ userData }); 
+        res.render('EditPost', { userData }); 
+    } catch (error) {
+        res.status(500).send(error.message); 
+    }
+	}
+
+	static async postEdit(req, res) {
+
+    const { content, imageUrl } = req.body;
+    const userId = req.session.userId;
+    const PostId = req.params.PostId; 
+
+    try {
+        await Post.update({ content, imageUrl 
+				},
+          {
+            where: { id: PostId, UserId: userId }, 
+          }
+        );
+
+      	res.redirect(`/posts/YourPost/${userId}`); 
+        
+    } catch (error) {
+        res.status(500).send(error.message); 
+    }
+}
+		static async removePost(req, res) {
+		const userId = req.session.userId;
+		const PostId = req.params.PostId
+		try {
+			await Post.destroy({
+				where: { id: PostId } // Menggunakan opsi where untuk menentukan post
+		});
+			// res.send({ userData }); 
+			res.redirect(`/posts/YourPost/${userId}`)
+		} catch (error) {
+			res.status(500).send(error.message); 
+		}
+}
+
 }
 
 module.exports = PostController;

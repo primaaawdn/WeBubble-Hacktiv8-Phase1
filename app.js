@@ -19,8 +19,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use(session({
     secret: 'yourSecretKey',
     resave: false,
-    saveUninitialized: true,
-    cookie: { secure: false }
+    saveUninitialized: false,
+    cookie: { 
+        secure: false,
+        sameSite:true }
 }));
 
 app.use(router);

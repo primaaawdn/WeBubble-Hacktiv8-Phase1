@@ -12,10 +12,6 @@
 	}
 </style>
 
-<a href="/posts/YourPost/<%= userId %>">Your Post</a>
-
-<a href="/users/<%= userId %>/posts/create">Add new Post</a>
-
 <div class="container my-4">
 	<h2 class="text-center mb-4">All Posts</h2>
 	<div class="row">
@@ -27,17 +23,17 @@
 				<% } %>
 				<div class="card-body">
 					<p class="card-text"><%= post.content %></p>
-					<% if(post.User.Profile){ %>
-						<p class="card-text">
-							<small class="text-muted">
-								Posted by <%= post.User.Profile.name %> | <%= new
-								Date(post.createdAt).toLocaleDateString() %>
-							</small>
-						</p>
+          
+          <p class="card-text">
+            <small class="text-muted">
+              | <%= new
+              Date(post.createdAt).toLocaleDateString() %> |
+            </small>
+          </p>
 
-					<% } %>
-					
-					<a href="/posts/<%= post.id %>"> <button> Detail Post</button></a>
+          <a href="/posts/YourPost/<%= UserId %>/<%= post.id %>/edit">Edit Post</a>
+          <a href="/posts/YourPost/<%= UserId %>/<%= post.id %>/delete">Delete Post</a>
+          
 				</div>
 			</div>
 		</div>
