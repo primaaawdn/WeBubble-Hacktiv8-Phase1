@@ -13,9 +13,13 @@
 </style>
 
 <div class="container my-4">
+<<<<<<< HEAD
 	<h2 class="text-center mb-4">All Posts</h2>
   <a href="/users/<%= UserId %>/posts/create">Add new Post</a>
   <br> <br>
+=======
+	<h2 class="text-center mb-4">Your Posts</h2>
+>>>>>>> 911acf9238042d83f8402c342dfdfa44f22430b5
 	<div class="row">
 		<% dataPost.forEach(post => { %>
 		<div class="col-md-4 mb-4">
@@ -33,8 +37,8 @@
             </small>
           </p>
 
-          <a href="/posts/YourPost/<%= UserId %>/<%= post.id %>/edit">Edit Post</a>
-          <a href="/posts/YourPost/<%= UserId %>/<%= post.id %>/delete">Delete Post</a>
+          <a href="/posts/YourPost/<%= userId %>/<%= post.id %>/edit">Edit Post</a>
+          <a href="/posts/YourPost/<%= userId %>/<%= post.id %>/delete">Delete Post</a>
           
 				</div>
 			</div>

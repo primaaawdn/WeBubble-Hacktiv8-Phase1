@@ -7,7 +7,7 @@
     <div class="d-flex flex-column align-items-center">
         <button 
             class="btn btn-primary mb-3" 
-            onclick="window.location.href='/users/<%= UserId %>/profile/create'"
+            onclick="window.location.href='/users/<%= UserId %>/profile/create'" 
             <%= hasProfile ? 'disabled' : '' %>
             style="width: 200px;"
         >
@@ -16,21 +16,13 @@
 
         <button 
             class="btn btn-info mb-3" 
-            onclick="window.location.href='/users/<%= UserId %>/profile/<%= user.id %>'"
+            onclick="window.location.href='/users/<%= UserId %>/profile'" 
             <%= hasProfile ? '' : 'disabled' %>
             style="width: 200px;"
         >
             My Profile
         </button>
 
-        <button 
-            class="btn btn-warning" 
-            onclick="window.location.href='/users/<%= UserId %>/profile/<%= user.id %>/edit'" 
-            <%= hasProfile ? '' : 'disabled' %>
-            style="width: 200px;"
-        >
-            Edit Profile
-        </button>
 
     </div>
 </div>

@@ -4,76 +4,36 @@
 <div class="container my-4">
     <h2 class="text-center mb-4">Create Your Profile</h2>
 
-    <form action="" method="POST" class="w-50 mx-auto">
+    <form action="/users/<%= UserId %>/profile/create" method="POST">
         <div class="form-group">
             <label for="name">Name</label>
-            <input 
-                type="text" 
-                class="form-control" 
-                id="name" 
-                name="name" 
-                placeholder="Enter your name"
-            >
+            <input type="text" class="form-control" id="name" name="name" required>
         </div>
 
         <div class="form-group">
             <label for="gender">Gender</label>
-            <select 
-                class="form-control" 
-                id="gender" 
-                name="gender"
-            >
-                <option value="">Select Gender</option>
-                <option value="male">Male</option>
-                <option value="female">Female</option>
+            <select class="form-control" id="gender" name="gender" required>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
             </select>
         </div>
 
         <div class="form-group">
-            <label for="group">Group</label>
-            <input 
-                type="text" 
-                class="form-control" 
-                id="group" 
-                name="group" 
-                placeholder="Enter your group"
-            >
-        </div>
-
-        <div class="form-group">
-            <label for="joinedDate">Join Date</label>
-            <input 
-                type="date" 
-                class="form-control" 
-                id="joinedDate" 
-                name="joinedDate" 
-            >
-        </div>
-
-        <div class="form-group">
             <label for="bio">Bio</label>
-            <textarea 
-                class="form-control" 
-                id="bio" 
-                name="bio" 
-                rows="3" 
-                placeholder="Tell us about yourself"
-            ></textarea>
+            <textarea class="form-control" id="bio" name="bio" rows="3" required></textarea>
         </div>
 
         <div class="form-group">
-            <label for="profilePicture">Profile Picture</label>
-            <input 
-                type="url" 
-                class="form-control-file" 
-                id="profilePicture" 
-                name="profilePicture"
-            >
+            <label for="group">Group</label>
+            <input type="text" class="form-control" id="group" name="group" required>
         </div>
 
-        <div>
-            <button type="submit" class="btn btn-primary">Create Profile</button>
+        <div class="form-group">
+            <label for="profilePicture">Profile Picture URL</label>
+            <input type="text" class="form-control" id="profilePicture" name="profilePicture">
         </div>
+
+        <button type="submit" class="btn btn-primary">Create Profile</button>
     </form>
 </div>
 

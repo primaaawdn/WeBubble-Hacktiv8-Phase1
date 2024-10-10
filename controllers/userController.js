@@ -40,7 +40,8 @@ class UserController {
 	}
 	static async createAccountForm(req, res) {
 		try {
-			res.render("CreateForm");
+			const UserId = req.params.id;
+            res.render('CreateForm', { UserId });
 		} catch (error) {
 			res.send(error.message);
 		}
