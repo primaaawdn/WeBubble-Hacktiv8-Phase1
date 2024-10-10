@@ -71,7 +71,6 @@ class ProfileController {
     
             const { name, gender, bio, group, profilePicture, joinedDate } = req.body;
     
-            // Validate that 'name' is provided
             // if (!name) {
             //     return res.status(400).send("Name is required."); // Send a 400 error response if name is missing
             // }
@@ -115,7 +114,6 @@ class ProfileController {
     
             const { name, gender, bio, group, profilePicture, joinedDate } = req.body;
     
-            // Validate that 'name' is provided
             // if (!name) {
             //     return res.status(400).send("Name is required."); // Send a 400 error response if name is missing
             // }

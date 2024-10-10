@@ -128,7 +128,7 @@ class PostController {
 		const PostId = req.params.PostId
 		try {
 			await Post.destroy({
-				where: { id: PostId } // Menggunakan opsi where untuk menentukan post
+				where: { id: PostId }
 		});
 			// res.send({ userData }); 
 			res.redirect(`/posts/YourPost/${userId}`)
