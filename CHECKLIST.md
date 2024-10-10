@@ -7,7 +7,7 @@
 - [x] Tambahan Migration
 - [x] Seeding
 - [x] Routes
-- [ ] Auth
+- [x] Auth
 - [x] MVC
 - [x] Fitur search
 - [ ] Static method di model

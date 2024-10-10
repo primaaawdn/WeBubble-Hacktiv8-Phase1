@@ -1,23 +1,26 @@
 <%- include('partials/header') %>
 
 <div class="container-full-height">
-    <div class="card shadow-lg p-4" style="width: 100%; max-width: 400px;">
-        <h3 class="text-center mb-4">Login to WeBubble</h3>
-        <form action="/login" method="POST">
-            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-            <div class="mb-3">
-                <label for="username" class="form-label">Username</label>
-                <input type="text" class="form-control" id="username" name="username">
-            </div>
-            <div class="mb-3">
-                <label for="password" class="form-label">Password</label>
-                <input type="password" class="form-control" id="password" name="password">
-            </div>
-            <div class="d-grid">
-                <button type="submit" class="btn btn-primary btn-block">Login</button>
-            </div>
-        </form>
-    </div>
+	<div class="card shadow-lg p-4" style="width: 100%; max-width: 400px">
+		<h3 class="text-center mb-4">Login to WeBubble</h3>
+		<form action="/login" method="POST">
+			<div class="mb-3">
+				<label for="username" class="form-label">Username</label>
+				<input type="text" class="form-control" id="username" name="username" />
+			</div>
+			<div class="mb-3">
+				<label for="password" class="form-label">Password</label>
+				<input
+					type="password"
+					class="form-control"
+					id="password"
+					name="password" />
+			</div>
+			<div class="d-grid">
+				<button type="submit" class="btn btn-primary btn-block">Login</button>
+			</div>
+		</form>
+	</div>
 </div>
 
 <%- include('partials/footer') %>
