@@ -9,4 +9,16 @@
     <p>Word Count: <%= dataPost.wordCount %></p>
 </div>
 
+
+<form action="/posts/<%= dataPost.id %>/tag" method="post">
+  <div class="form-group">
+      <label for="tagInput">Add a Tag:</label>
+      <input type="text" name="tag" class="form-control" id="tagInput" placeholder="Enter a tag" >
+  </div>
+  <br> <br>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+<%  %>
+
 <%- include('partials/Footer') %>

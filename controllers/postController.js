@@ -1,6 +1,9 @@
 const { Post, User, Profile } = require("../models");
 const formattedDate = require("../helpers/formattedDate");
 
+const { Post, User, Profile, Tag, PostTag, sequelize } = require("../models");
+const { includes } = require("../validations/login.validation");
+
 class PostController {
 	static async getPost(req, res) {
 		try {
@@ -12,12 +15,21 @@ class PostController {
 						attributes: ["username"],
 						include: [
 							{
-								model: Profile,
+								model: Profile, 
 								attributes: ["name"],
 							},
+						// 	{
+						// 		model: PostTag,
+						// 		include: [{
+						// 				model: Tag,
+						// 				attributes: ['tag']
+						// 		}]
+						// }
 						],
 					},
 				],
+				
+
 				order: [["createdAt", "DESC"]],
 			});
 
@@ -81,7 +93,7 @@ class PostController {
 		try {
 			const userId = req.session.userId;
 			const dataPost = await Post.findAll({
-				where: { userId: userId },
+				where: { UserId: userId },
 				order: [["createdAt", "DESC"]],
 			});
 			res.render("YourPost", { userId, dataPost, formattedDate });
