@@ -80,18 +80,20 @@ class PostController {
 	}
 
 	static async YourPost(req, res) {
-		const userId = req.session.userId
 		try {
-			const dataPost = await Post.findAll({
-				where: { UserId: userId },
-				order: [['createdAt', 'DESC']], 
-		});
-			res.render('YourPost', {UserId: userId, dataPost, formattedDate})	
-			// res.send({UserId: userId, dataPost})
-		} catch (error) {
-			res.send(error.message)
-		}
-	}
+			const userId = req.session.userId; 
+			// console.log(req.session.userId);
+            const dataPost = await Post.findAll({
+                where: { userId: userId }, 
+                order: [['createdAt', 'DESC']],
+            });
+			
+			// res.send(dataPost)
+            res.render('YourPost', { userId, dataPost, formattedDate }); 
+        } catch (error) {
+            res.status(500).send(error.message); 
+        }
+    }
 
 	static async getEdit(req, res) {
     
@@ -112,8 +114,7 @@ class PostController {
     const PostId = req.params.PostId; 
 
     try {
-        await Post.update({ content, imageUrl 
-				},
+        await Post.update({ content, imageUrl },
           {
             where: { id: PostId, UserId: userId }, 
           }

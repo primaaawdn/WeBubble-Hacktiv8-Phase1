@@ -13,7 +13,7 @@
 </style>
 
 <div class="container my-4">
-	<h2 class="text-center mb-4">All Posts</h2>
+	<h2 class="text-center mb-4">Your Posts</h2>
 	<div class="row">
 		<% dataPost.forEach(post => { %>
 		<div class="col-md-4 mb-4">
@@ -26,12 +26,13 @@
           
           <p class="card-text">
             <small class="text-muted">
-              | <%= formattedDate(post.createdAt) %> |
+              | <%= new
+              Date(post.createdAt).toLocaleDateString() %> |
             </small>
           </p>
 
-          <a href="/posts/YourPost/<%= UserId %>/<%= post.id %>/edit">Edit Post</a>
-          <a href="/posts/YourPost/<%= UserId %>/<%= post.id %>/delete">Delete Post</a>
+          <a href="/posts/YourPost/<%= userId %>/<%= post.id %>/edit">Edit Post</a>
+          <a href="/posts/YourPost/<%= userId %>/<%= post.id %>/delete">Delete Post</a>
           
 				</div>
 			</div>
