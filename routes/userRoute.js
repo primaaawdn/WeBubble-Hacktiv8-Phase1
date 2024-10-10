@@ -4,6 +4,7 @@ const router = require("express").Router();
 router.get("/", UserController.landing);
 router.get("/login", UserController.loginPage);
 router.post("/login", UserController.login);
+router.get("/logout", UserController.logout);
 
 router.get("/users/create", UserController.createAccountForm);
 router.post("/users/create", UserController.createAccount);

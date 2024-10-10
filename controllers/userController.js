@@ -65,10 +65,19 @@ class UserController {
         }
     }
 
-    // static logout(req, res) {
-
-    //     res.redirect('/');
-    // }
+    static logout(req, res) {
+        if (req.session) {
+            req.session.destroy(error => {
+                if (error) {
+                    console.error("Session destroy error:", error);
+                    return res.status(500).send("Error logging out.");
+                } // nanti harus benerin validasi lagi
+                res.redirect('/');
+            });
+        } else {
+            res.redirect('/'); 
+        }
+    }
 }
 
 module.exports = UserController;
