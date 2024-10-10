@@ -1,5 +1,7 @@
 const { validationResult } = require("express-validator");
 const { Post, User, Profile, sequelize } = require("../models");
+const formattedDate = require("../helpers/formattedDate");
+
 
 class PostController {
 	static async getPost(req, res) {
@@ -20,7 +22,7 @@ class PostController {
 				],
 				order: [["createdAt", "DESC"]],
 			});
-			res.render("Post", { dataPost, userId });
+			res.render("Post", { dataPost, userId, formattedDate });
 		} catch (error) {
 			res.send(error);
 		}
@@ -43,28 +45,28 @@ class PostController {
 				],
 			});
 			// res.send(dataPost);
-			res.render("PostId", { dataPost });
+			res.render("PostId", { dataPost, formattedDate });
 		} catch (error) {
 			res.send(error.message);
 		}
 	}
 
 	static async createPost(req, res) {
-    const userId = req.session.userId; 
-    try {
-        const userData = await User.findOne({
-            where: { id: userId }
-        });
+		try {
+			const userId = req.session.userId; 
+			const userData = await User.findOne({
+				where: { id: userId }
+			});
 
-        if (!userData) {
-            return res.status(404).send('User not found'); 
-        }
-        // res.send({ userData }); 
-        res.render('newPost', { userData }); 
-    } catch (error) {
-        res.status(500).send(error.message); 
-    }
-}
+			if (!userData) {
+				return res.status(404).send('User not found'); 
+			}
+			// res.send({ userData }); 
+			res.render('newPost', { userData }); 
+		} catch (error) {
+			res.status(500).send(error.message); 
+		}
+	}
 
 	static async postNewPost(req, res) {
 		const {content, imageUrl} = req.body
@@ -84,7 +86,7 @@ class PostController {
 				where: { UserId: userId },
 				order: [['createdAt', 'DESC']], 
 		});
-			res.render('YourPost', {UserId: userId, dataPost})	
+			res.render('YourPost', {UserId: userId, dataPost, formattedDate})	
 			// res.send({UserId: userId, dataPost})
 		} catch (error) {
 			res.send(error.message)

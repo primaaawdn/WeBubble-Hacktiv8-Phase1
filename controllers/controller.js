@@ -21,9 +21,9 @@ class Controller {
             const { username, password } = req.body;
             const user = await User.findOne({ where: { username } }); 
 
-            // if (!user) {
-            //     return res.status(401).send("Invalid username or password.");
-            // } // nanti harus benerin validasi lagi
+            if (!user) {
+                return res.status(401).send("Invalid username or password.");
+            } // nanti harus benerin validasi lagi
 
             const passwordMatch = await bcrypt.compare(password, user.password);
 

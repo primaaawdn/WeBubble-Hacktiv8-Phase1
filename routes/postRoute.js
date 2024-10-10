@@ -2,15 +2,6 @@ const PostController = require("../controllers/postController");
 
 const router = require("express").Router();
 
-router.use(function(req, res, next){
-  if(!req.session.userId){
-    const error = 'Please login first!'
-    res.redirect(`/login?error=${error}`)
-  } else {
-    next()
-  }
-})
-
 router.get("/posts", PostController.getPost);
 router.get("/posts/:PostId", PostController.ViewPost);
 router.get("/users/:UserId/posts/create", PostController.createPost);

@@ -5,7 +5,7 @@
     <h1><%= dataPost.User.Profile.name %> - <%= dataPost.User.username %></h1>
     <p><%= dataPost.content %></p>
     <img src="<%= dataPost.imageUrl %>" alt="Post Image" />
-    <p><small>Posted on <%= new Date(dataPost.createdAt).toLocaleDateString() %></small></p>
+    <p><small>Posted on <%= formattedDate(dataPost.createdAt) %></small></p>
 </div>
 
 <%- include('partials/Footer') %>

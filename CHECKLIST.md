@@ -34,9 +34,9 @@
 
 #### **Profile Management**
 
-- [ ] `GET /users/:UserId/profile/create`: Page to display form to create a new profile.
-- [ ] `POST /users/:UserId/profile/create`: Endpoint to create a new post for a user.
-- [] `GET /users/:UserId/profile/:profileId`: Endpoint to retrieve a specific user profile.
+- [x] `GET /users/:UserId/profile/create`: Page to display form to create a new profile.
+- [x] `POST /users/:UserId/profile/create`: Endpoint to create a new post for a user.
+- [x] `GET /users/:UserId/profile/:profileId`: Endpoint to retrieve a specific user profile.
 - [ ] `GET /users/:UserId/profile/:profileId/edit`: Page to display the form to update a profile.
 - [ ] `POST /users/:UserId/profile/:profileId/edit`: Endpoint to update the profile content.
 
@@ -61,3 +61,16 @@
 - [ ] `GET /tags`: Show all tags.
 - [ ] `GET /posts/tags/:TagId`: Retrieve posts filtered by a tag.
 - [ ] `GET /tags/:TagId/delete`: Endpoint to delete a tag.
+
+
+code profilepage.ejs:
+<!-- 
+        <button 
+            class="btn btn-warning" 
+            onclick="window.location.href='/users/<%= user.UserId %>/profile/edit/<%= user.id %>'" 
+            <%= hasProfile ? '' : 'disabled' %>
+            style="width: 200px;"
+        >
+            Edit Profile
+        </button>
+ -->

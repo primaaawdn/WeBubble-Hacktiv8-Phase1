@@ -26,8 +26,7 @@
           
           <p class="card-text">
             <small class="text-muted">
-              | <%= new
-              Date(post.createdAt).toLocaleDateString() %> |
+              | <%= formattedDate(post.createdAt) %> |
             </small>
           </p>
 

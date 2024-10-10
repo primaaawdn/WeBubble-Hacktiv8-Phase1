@@ -30,8 +30,7 @@
 					<% if(post.User.Profile){ %>
 						<p class="card-text">
 							<small class="text-muted">
-								Posted by <%= post.User.Profile.name %> | <%= new
-								Date(post.createdAt).toLocaleDateString() %>
+								Posted by <%= post.User.Profile.name %> | <%= formattedDate(post.createdAt) %>
 							</small>
 						</p>
 
