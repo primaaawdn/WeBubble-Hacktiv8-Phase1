@@ -1,4 +1,5 @@
-const { Post, User, Profile } = require("../models");
+const { validationResult } = require("express-validator");
+const { Post, User, Profile, sequelize } = require("../models");
 
 class PostController {
 	static async getPost(req, res) {
@@ -46,26 +47,35 @@ class PostController {
 	}
 
 	static async createPost(req, res) {
-		const {userId} = req.session.userId
-		try {
-			const [data] = await User.findAll({
-				where: { id: userId }
-		});
-			res.send(data)
-			// res.render('newPost', {data});
-		} catch (error) {
-      res.send(error.message);
+    const userId = req.session.userId; 
+    try {
+        if (!userId) {
+            return res.status(401).send('User not logged in'); // Jika user tidak login
+        }
+        const userData = await User.findOne({
+            where: { id: userId }
+        });
+
+        if (!userData) {
+            return res.status(404).send('User not found'); 
+        }
+        // res.send({ userData }); 
+        res.render('newPost', { userData }); // Menggunakan data untuk merender halaman
+    } catch (error) {
+        res.status(500).send(error.message); // Menangani error dengan status 500
     }
-	}
+}
+
 
 	static async postNewPost(req, res) {
-		const {UserId, content, imageUrl} = req.body
-		const {userId} = req.session.userId
+		const {content, imageUrl} = req.body
+		const userId = req.session.userId
 		try {
-			
-			await Post.create({UserId, content, imageUrl})
-			res.send()
-			// res.redirect('/posts');
+			if (!userId) {
+				return res.status(401).send('User not logged in'); // Jika user tidak login
+			}
+			await Post.create({UserId: userId, content, imageUrl})
+			res.redirect('/posts');
 		} catch (error) {
       res.send(error.message);
     }
