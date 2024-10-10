@@ -20,7 +20,7 @@ class PostController {
 				],
 				order: [["createdAt", "DESC"]],
 			});
-			res.render("Post", { dataPost, userId, csrfToken: req.csrfToken() });
+			res.render("Post", { dataPost, userId });
 		} catch (error) {
 			res.send(error.message);
 		}
