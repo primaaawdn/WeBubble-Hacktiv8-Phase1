@@ -10,16 +10,26 @@
 	.card-text {
 		color: #333;
 	}
+	.btn-custom {
+		background-color: #87CEEB; /* Warna biru muda */
+		color: white;
+		border: none;
+		padding: 10px 20px;
+		text-align: center;
+		text-decoration: none;
+		display: inline-block;
+		border-radius: 5px;
+		transition: background-color 0.3s;
+	}
+	.btn-custom:hover {
+		background-color: #00BFFF; /* Warna biru yang lebih gelap saat hover */
+	}
 </style>
 
 <div class="container my-4">
-<<<<<<< HEAD
 	<h2 class="text-center mb-4">All Posts</h2>
-  <a href="/users/<%= UserId %>/posts/create">Add new Post</a>
-  <br> <br>
-=======
-	<h2 class="text-center mb-4">Your Posts</h2>
->>>>>>> 911acf9238042d83f8402c342dfdfa44f22430b5
+  	<a href="/users/<%= userId %>/posts/create" class="btn-custom">Add new Post</a>
+  	<br><br>
 	<div class="row">
 		<% dataPost.forEach(post => { %>
 		<div class="col-md-4 mb-4">
@@ -30,22 +40,20 @@
 				<div class="card-body">
 					<p class="card-text"><%= post.content %></p>
           
-          <p class="card-text">
-            <small class="text-muted">
-              | <%= new
-              Date(post.createdAt).toLocaleDateString() %> |
-            </small>
-          </p>
+          			<p class="card-text">
+          				<small class="text-muted">
+          					| <%= new Date(post.createdAt).toLocaleDateString() %> |
+          				</small>
+          			</p>
 
-          <a href="/posts/YourPost/<%= userId %>/<%= post.id %>/edit">Edit Post</a>
-          <a href="/posts/YourPost/<%= userId %>/<%= post.id %>/delete">Delete Post</a>
+          			<a href="/posts/YourPost/<%= userId %>/<%= post.id %>/edit" class="btn-custom" >Edit Post</a>
+          			<a href="/posts/YourPost/<%= userId %>/<%= post.id %>/delete" class="btn-custom">Delete Post</a>
           
 				</div>
 			</div>
 		</div>
 		<% }) %>
 	</div>
-  
 </div>
 
 <%- include('partials/Footer') %>

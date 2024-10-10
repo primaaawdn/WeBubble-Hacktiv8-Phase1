@@ -10,9 +10,25 @@
 	.card-text {
 		color: #333;
 	}
+	.btn-custom {
+		background-color: #87CEEB; /* Warna biru muda */
+		color: white;
+		border: none;
+		padding: 10px 20px;
+		text-align: center;
+		text-decoration: none;
+		display: inline-block;
+		border-radius: 5px;
+		transition: background-color 0.3s;
+		cursor: pointer;
+	}
+	.btn-custom:hover {
+		background-color: #00BFFF; /* Warna biru yang lebih gelap saat hover */
+	}
 </style>
 
-<a href="/posts/YourPost/<%= userId %>">Your Post</a>
+<br> <br>
+<a href="/posts/YourPost/<%= userId %>" class="btn-custom">Your Post</a>
 
 <br><br>
 
@@ -35,14 +51,14 @@
                         </p>
                     <% } %>
                     
-                    <a href="/posts/<%= post.id %>"> <button> Detail Post</button></a>
+                    <a href="/posts/<%= post.id %>">
+                        <button class="btn-custom">Detail Post</button>
+                    </a>
                 </div>
             </div>
         </div>
         <% }) %>
     </div>
 </div>
-
-
 
 <%- include('partials/Footer') %>

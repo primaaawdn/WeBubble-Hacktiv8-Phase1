@@ -1,5 +1,4 @@
 const { validationResult } = require("express-validator");
-const { Post, User, Profile, sequelize } = require("../models");
 const formattedDate = require("../helpers/formattedDate");
 
 const { Post, User, Profile, Tag, PostTag, sequelize } = require("../models");
@@ -72,8 +71,8 @@ class PostController {
 			if (!userData) {
 				return res.status(404).send('User not found'); 
 			}
-			// res.send({ userData }); 
-			res.render('newPost', { userData }); 
+			res.send({ userData }); 
+			// res.render('newPost', { userData }); 
 		} catch (error) {
 			res.status(500).send(error.message); 
 		}
@@ -95,7 +94,7 @@ class PostController {
 			const userId = req.session.userId; 
 			// console.log(req.session.userId);
             const dataPost = await Post.findAll({
-                where: { userId: userId }, 
+                where: { UserId: userId }, 
                 order: [['createdAt', 'DESC']],
             });
 			

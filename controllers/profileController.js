@@ -1,6 +1,7 @@
 const formattedDate = require("../helpers/formattedDate");
 const { User, Profile, Tag, Post, PostTag } = require("../models");
 
+
 class ProfileController {
 	static async getProfile(req, res) {
 		try {
@@ -65,30 +66,35 @@ class ProfileController {
 	}
 
 	static async createProfile(req, res) {
-		try {
-			const UserId = req.session.userId;
+    try {
+        const UserId = req.session.userId;
 
-			const { name, gender, bio, group, profilePicture, joinedDate } = req.body;
+        const { name, gender, bio, group } = req.body;
 
-			const parsedJoinedDate = joinedDate ? new Date(joinedDate) : new Date();
+        const profilePicture = req.file ? req.file.path : null; 
 
-			const newProfile = await Profile.create({
-				UserId: UserId,
-				name: name,
-				gender: gender,
-				bio: bio,
-				group: group,
-				profilePicture: profilePicture,
-				joinedDate: parsedJoinedDate,
-			});
+        
+        const joinedDate = req.body.joinedDate ? new Date(req.body.joinedDate) : new Date();
 
-			console.log("Created Profile ID:", newProfile.id);
-			res.redirect(`/users/${UserId}/profile/${newProfile.id}`);
-		} catch (error) {
-			console.error(error);
-			res.send(error.message);
-		}
-	}
+        
+        const newProfile = await Profile.create({
+            UserId: UserId,
+            name: name,
+            gender: gender,
+            bio: bio,
+            group: group,
+            profilePicture: profilePicture,
+            joinedDate: joinedDate,
+        });
+
+        console.log("Created Profile ID:", newProfile.id);
+        res.redirect(`/users/${UserId}/profile/${newProfile.id}`);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send(error.message); // Kirim status 500 jika terjadi error
+    }
+}
+
 	static async editProfileForm(req, res) {
 		try {
 			const { UserId, ProfileId } = req.params;
