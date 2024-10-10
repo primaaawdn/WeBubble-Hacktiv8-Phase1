@@ -29,7 +29,6 @@ app.use(postRoute);
 app.use(profileRoute);
 app.use(tagRoute);
 
-
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`);
 });

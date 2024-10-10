@@ -9,14 +9,16 @@ class PostController {
 				include: [
 					{
 						model: User,
-						attributes: ['username'],
-						include: [{
-							model: Profile,
-							attributes: ['name']
-						}]
-					}
+						attributes: ["username"],
+						include: [
+							{
+								model: Profile,
+								attributes: ["name"],
+							},
+						],
+					},
 				],
-				order: [['createdAt', 'DESC']],
+				order: [["createdAt", "DESC"]],
 			});
 			res.render("Post", { dataPost, userId, csrfToken: req.csrfToken() });
 		} catch (error) {
@@ -24,26 +26,27 @@ class PostController {
 		}
 	}
 	static async ViewPost(req, res) {
-		const {PostId} = req.params
+		const { PostId } = req.params;
 		try {
-			const dataPost = await Post.findByPk(PostId, 
-				{
+			const dataPost = await Post.findByPk(PostId, {
 				include: [
 					{
 						model: User,
-						attributes: ['username'],
-						include: [{
-							model: Profile,
-							attributes: ['name']
-						}]
-					}
-				]
+						attributes: ["username"],
+						include: [
+							{
+								model: Profile,
+								attributes: ["name"],
+							},
+						],
+					},
+				],
 			});
 			// res.send(dataPost);
-			res.render('PostId', { dataPost });
+			res.render("PostId", { dataPost });
 		} catch (error) {
-            res.send(error.message);
-        }
+			res.send(error.message);
+		}
 	}
 
 	static async createPost(req, res) {
@@ -77,8 +80,8 @@ class PostController {
 			await Post.create({UserId: userId, content, imageUrl})
 			res.redirect('/posts');
 		} catch (error) {
-      res.send(error.message);
-    }
+			res.send(error.message);
+		}
 	}
 }
 
