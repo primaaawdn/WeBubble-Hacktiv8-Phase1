@@ -23,9 +23,9 @@ class PostController {
 		}
 	}
 	static async ViewPost(req, res) {
-		const {UserId} = req.params
+		const {PostId} = req.params
 		try {
-			const dataPost = await Post.findByPk(UserId, 
+			const dataPost = await Post.findByPk(PostId, 
 				{
 				include: [
 					{

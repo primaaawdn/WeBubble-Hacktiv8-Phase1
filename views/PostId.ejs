@@ -1,24 +1,11 @@
+<%- include('partials/Header') %>
+<%- include('partials/NavBar') %>
 
-  <%- include('partials/header') %>
-  <%- include('partials/NavBar') %>
- 
-  <br> <br>
-  
-  
-  <div class="card" style="width: 40rem;" >
-  <img src="<%= dataPost.imageUrl  %>" class="card-img-top" alt="...">
-  <div class="card-body">
-    <h4><%= dataPost.User.username  %></h4>
-    <p class="card-text">"<%= dataPost.content  %>"</p>
-    <small class="text-muted">
-      Posted by <%= dataPost.User.Profile.name %> | <%= new
-      Date(dataPost.createdAt).toLocaleDateString() %>
-    </small>
-  </div>
-  </div>
-  
+<div class="container">
+    <h1><%= dataPost.User.Profile.name %> - <%= dataPost.User.username %></h1>
+    <p><%= dataPost.content %></p>
+    <img src="<%= dataPost.imageUrl %>" alt="Post Image" />
+    <p><small>Posted on <%= new Date(dataPost.createdAt).toLocaleDateString() %></small></p>
+</div>
 
-  
-
-
-  <%- include('partials/footer') %>
+<%- include('partials/Footer') %>
