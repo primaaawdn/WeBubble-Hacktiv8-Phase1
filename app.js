@@ -12,17 +12,18 @@ app.set("view engine", "ejs");
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 
-
-app.use(userRoute);
-app.use(postRoute);
-app.use(profileRoute);
-app.use(tagRoute);
 app.use(session({
     secret: 'yourSecretKey',
     resave: false,
     saveUninitialized: true,
     cookie: { secure: false }
 }));
+
+app.use(userRoute);
+app.use(postRoute);
+app.use(profileRoute);
+app.use(tagRoute);
+
 
 // app.use('/', index);
 // app.use('/posts', postRoute);

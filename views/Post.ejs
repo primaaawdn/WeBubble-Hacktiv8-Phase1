@@ -12,6 +12,8 @@
 	}
 </style>
 
+<a href="/users/<%= UserId %>/posts/create">Add new Post</a>
+
 <div class="container my-4">
 	<h2 class="text-center mb-4">All Posts</h2>
 	<div class="row">
@@ -29,6 +31,7 @@
 							Date(post.createdAt).toLocaleDateString() %>
 						</small>
 					</p>
+					<a href="/users/<%= post.UserId %>/posts"> <button> Detail Post</button></a>
 				</div>
 			</div>
 		</div>

@@ -1,0 +1,31 @@
+<%- include('partials/Header') %>
+<%- include('partials/NavBar') %>
+
+<br> <br>
+
+<p> Are you ready to tell your stories <%= dataPost.User.Profile.name %>?</p>
+
+<img src="<%= dataPost.User.Profile.profilePicture %>" class="rounded-circle" style="width: 40px;"
+  alt="Avatar" />
+
+<form action="/users/<%= dataPost.UserId/posts/create" method="post">
+
+  <h4 name="UserId" value="<%= dataPost.UserId  %>"><%= dataPost.User.username %></h4>
+
+  <div class="form-group">
+    <label for="exampleFormControlTextarea1">Write your stories here~</label>
+    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+  </div>
+  <br> <br>
+
+  <input class="form-control" type="text" placeholder="picture">
+  <br><br>
+
+  <button class="btn btn-primary" type="submit">Post it</button>
+</form>
+
+
+
+
+
+<%- include('partials/footer') %>

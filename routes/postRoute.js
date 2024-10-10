@@ -3,9 +3,9 @@ const PostController = require("../controllers/postController");
 const router = require("express").Router();
 
 router.get("/posts", PostController.getPost);
-// router.get("/users/:UserId/posts");
-// router.get("/users/:UserId/posts/create");
-// router.post("/users/:UserId/posts/create");
+router.get("/users/:UserId/posts", PostController.ViewPost);
+router.get("/users/:UserId/posts/create", PostController.createPost);
+router.post("/users/:UserId/posts/create", PostController.postNewPost);
 // router.get("/posts/:PostId");
 // router.get("/posts/:PostId/edit");
 // router.post("/posts/:PostId/edit");

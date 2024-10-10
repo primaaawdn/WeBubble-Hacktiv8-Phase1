@@ -8,7 +8,8 @@ module.exports = {
         references: {
           model: 'Tags',
           key: 'id'
-        }
+        },
+        allowNull: false
        });
   },
 
