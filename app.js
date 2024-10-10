@@ -1,5 +1,7 @@
 const express = require("express");
 const session = require('express-session');
+const multer  = require('multer')
+const upload = multer({ dest: 'uploads/' })
 
 const app = express();
 const port = 3000;

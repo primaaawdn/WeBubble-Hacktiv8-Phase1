@@ -5,7 +5,6 @@ class UserController {
 	static async getAllUsers(req, res) {
 		try {
 			let { role, search } = req.query;
-			// console.log(req.query);
 
 			let filterRole = {};
 			let searchName = {};
@@ -33,7 +32,7 @@ class UserController {
 				where: { ...searchName },
 				order: [["name", "ASC"]],
 			});
-			// res.send(dataUser)
+
 			res.render("Users", { dataUser, role: role || "", search: search || "" });
 		} catch (error) {
 			res.send(error.message);
