@@ -34,9 +34,9 @@
 
 #### **Profile Management**
 
-- [ ] `GET /users/:UserId/profile/create`: Page to display form to create a new profile post.
+- [ ] `GET /users/:UserId/profile/create`: Page to display form to create a new profile.
 - [ ] `POST /users/:UserId/profile/create`: Endpoint to create a new post for a user.
-- [ ] `GET /users/:UserId/profile/:profileId`: Endpoint to retrieve a specific user profile.
+- [] `GET /users/:UserId/profile/:profileId`: Endpoint to retrieve a specific user profile.
 - [ ] `GET /users/:UserId/profile/:profileId/edit`: Page to display the form to update a profile.
 - [ ] `POST /users/:UserId/profile/:profileId/edit`: Endpoint to update the profile content.
 

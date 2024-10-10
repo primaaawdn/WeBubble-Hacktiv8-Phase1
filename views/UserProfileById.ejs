@@ -1,0 +1,44 @@
+<%- include('partials/Header') %>
+<%- include('partials/NavBar') %>
+
+<div class="container my-4">
+    <h2 class="text-center mb-4"><%= dataProfile.Profile.name %></h2>
+    
+    <div class="row justify-content-center mb-4">
+        <div class="col-md-4">
+            <div class="card shadow-sm text-center">
+                <% if (dataProfile.Profile.profilePicture) { %>
+                    <img src="<%= dataProfile.Profile.profilePicture %>" class="card-img-top rounded-circle" alt="Profile Picture" style="width: 150px; height: 150px; object-fit: cover; margin: 15px auto;">
+                <% } else { %>
+                    <img src="/images/default-profile.png" class="card-img-top rounded-circle" alt="Default Profile Picture" style="width: 150px; height: 150px; object-fit: cover; margin: 15px auto;">
+                <% } %>
+                <div class="card-body">
+                    <p class="card-text"><strong>Gender:</strong> <%= dataProfile.Profile.gender %></p>
+                    <p class="card-text"><strong>Group:</strong> <%= dataProfile.Profile.group %></p>
+                    <p class="card-text"><strong>Joined:</strong> <%= new Date(dataProfile.Profile.joinedDate).toLocaleDateString() %></p>
+                    <p class="card-text"><strong>Bio:</strong> <%= dataProfile.Profile.bio || 'No bio available' %></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h4 class="mb-4"><%= dataProfile.Profile.name %>'s Posts</h4>
+    <div class="row justify-content-start">
+        <% if (dataProfile.Posts.length > 0) { %>
+            <% dataProfile.Posts.forEach(post => { %>
+                <div class="col-md-4 mb-3">
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <p class="card-text"><%= post.content %></p>
+                            <p class="card-text"><small class="text-muted">Posted on: <%= new Date(post.createdAt).toLocaleDateString() %></small></p>
+                        </div>
+                    </div>
+                </div>
+            <% }) %>
+        <% }  else { %>
+            <p>No post has been made.</p>
+        <% } %>
+    </div>
+</div>
+
+<%- include('partials/Footer') %>
