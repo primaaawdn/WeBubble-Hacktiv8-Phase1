@@ -1,8 +1,10 @@
+const { where } = require("sequelize");
 const { Post, User, Profile } = require("../models");
 
 class PostController {
 	static async getPost(req, res) {
 		try {
+			const userId = req.session.userId;
 			const dataPost = await Post.findAll({
 				include: [
 					{
@@ -17,7 +19,8 @@ class PostController {
                 order: [['createdAt', 'DESC']],
 			});
 			// res.send({dataPost});
-			res.render("Post", { dataPost });
+		
+			res.render("Post", { dataPost, userId: userId || null });
 		} catch (error) {
             res.send(error.message);
         }
@@ -47,23 +50,13 @@ class PostController {
 	}
 
 	static async createPost(req, res) {
-		let { UserId } = req.params
+		const {userId} = req.session.userId
 		try {
-			const dataPost = await Post.findByPk(UserId, 
-				{
-				include: [
-					{
-						model: User,
-						attributes: ['username'],
-						include: [{
-							model: Profile,
-							attributes: ['name', 'profilePicture']
-						}]
-					}
-				]
-			});
-			// res.send(dataPost);
-			res.render('newPost', { dataPost, UserId});
+			const [data] = await User.findAll({
+				where: { id: userId }
+		});
+			res.send(data)
+			// res.render('newPost', {data});
 		} catch (error) {
       res.send(error.message);
     }
@@ -71,11 +64,12 @@ class PostController {
 
 	static async postNewPost(req, res) {
 		const {UserId, content, imageUrl} = req.body
+		const {userId} = req.session.userId
 		try {
 			
-		await Post.create({UserId, content, imageUrl})
-		
-			res.redirect('/posts');
+			await Post.create({UserId, content, imageUrl})
+			res.send()
+			// res.redirect('/posts');
 		} catch (error) {
       res.send(error.message);
     }
