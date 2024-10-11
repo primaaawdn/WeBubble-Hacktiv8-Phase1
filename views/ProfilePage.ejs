@@ -1,12 +1,12 @@
 <%- include('partials/Header') %>
 <%- include('partials/NavBar') %>
 
-<div class="container my-4">
-    <h2 class="text-center mb-4">Profile Management</h2>
+<div class="container my-5">
+    <h2 class="text-center mb-5">Profile Management</h2>
 
     <div class="d-flex flex-column align-items-center">
         <button 
-            class="btn btn-primary mb-3" 
+            class="btn btn-primary mb-4" 
             onclick="window.location.href='/users/<%= UserId %>/profile/create'" 
             <%= hasProfile ? 'disabled' : '' %>
             style="width: 200px;"
@@ -15,15 +15,13 @@
         </button>
 
         <button 
-            class="btn btn-info mb-3" 
+            class="btn btn-info mb-4" 
             onclick="window.location.href='/users/<%= UserId %>/profile'" 
             <%= hasProfile ? '' : 'disabled' %>
             style="width: 200px;"
         >
             My Profile
         </button>
-
-
     </div>
 </div>
 

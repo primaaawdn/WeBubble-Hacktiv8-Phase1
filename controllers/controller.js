@@ -23,13 +23,13 @@ class Controller {
 
             if (!user) {
                 return res.status(401).send("Invalid username or password.");
-            } // nanti harus benerin validasi lagi
+            }
 
             const passwordMatch = await bcrypt.compare(password, user.password);
 
             if (!passwordMatch) {
                 return res.status(401).send("Invalid username or password.");
-            } // nanti harus benerin validasi lagi
+            }
             req.session.userId = user.id;
             res.redirect('/posts');
         } catch (error) {
@@ -46,7 +46,7 @@ class Controller {
                 if (error) {
                     console.error("Session destroy error:", error);
                     return res.status(500).send("Error logging out.");
-                } // nanti harus benerin validasi lagi
+                }
                 res.redirect('/');
             });
         } else {

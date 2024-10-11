@@ -1,10 +1,7 @@
 const ProfileController = require("../controllers/profileController");
 const router = require("express").Router();
 const uploadController = require('../controllers/uploadController');
-// const isAuthenticated = require('../middleware/auth');
-// router.use(isAuthenticated);
 
-// Middleware untuk memastikan user sudah login
 router.use(function (req, res, next) {
     if (!req.session.userId) {
         const error = `Please login first`;
@@ -14,7 +11,6 @@ router.use(function (req, res, next) {
     }
 });
 
-// Rute untuk halaman profil
 router.get("/profile", ProfileController.profilePage);
 router.get("/users/:UserId/profile", ProfileController.getProfile);
 router.get("/users/:UserId/profile/create", ProfileController.createForm);

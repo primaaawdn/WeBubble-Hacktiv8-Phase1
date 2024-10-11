@@ -24,14 +24,6 @@ Here are the available routes in the **WeBubble** application, categorized for e
   - **`GET /users/create`**: Show the create account page
   - **`POST /users/create`**: Create a new account
 
-- **Update Account:**
-
-  - **`GET /users/:UserId/edit`**: Show the update profile page
-  - **`POST /users/:UserId/edit`**: Update profile information
-
-- **Delete Account:**
-  - **`GET /users/:UserId/delete`**: Delete a user account
-
 ### **Profile Management**
 
 - **Create Profile Post:**
@@ -39,22 +31,8 @@ Here are the available routes in the **WeBubble** application, categorized for e
   - **`GET /users/:UserId/profile/create`**: Show the create new post form for a specific user
   - **`POST /users/:UserId/profile/create`**: Create a new post for a specific user
 
-- **Update Profile:**
-
-  - **`GET /users/:UserId/profile/:ProfileId/edit`**: Show the update profile page
-  - **`POST /users/:UserId/profile/:ProfileId/edit`**: Update profile information
-
 - **View Profile:**
   - **`GET /users/:UserId/profile/:ProfileId`**: Retrieve a specific user profile
-
-### **Idol and Manager Profiles**
-
-- **Retrieve Idol Profiles:**
-
-  - **`GET /users/idols`**: Retrieve all idol profiles
-
-- **Retrieve Manager Profiles:**
-  - **`GET /users/managers`**: Retrieve all manager profiles
 
 ### **Post Management**
 
@@ -66,10 +44,6 @@ Here are the available routes in the **WeBubble** application, categorized for e
 
   - **`GET /users/:UserId/posts/create`**: Show the create new post form for a specific user
   - **`POST /users/:UserId/posts/create`**: Create a new post for a specific user
-
-- **Retrieve All Posts by User:**
-
-  - **`GET /users/:UserId/posts`**: Retrieve all posts created by a specific user
 
 - **Retrieve a Specific Post:**
 

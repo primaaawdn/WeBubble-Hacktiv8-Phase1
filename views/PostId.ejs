@@ -1,13 +1,32 @@
 <%- include('partials/Header') %>
 <%- include('partials/NavBar') %>
 
-<div class="container">
-    <h1><%= dataPost.User.Profile.name %> - <%= dataPost.User.username %></h1>
-    <p><%= dataPost.content %></p>
-    <img src="<%= dataPost.imageUrl %>" alt="Post Image" />
-    <p><small>Posted on <%= formattedDate(dataPost.createdAt) %></small></p>
-</div>
+<div class="container my-4">
+    <div class="row">
+        <div class="col-md-8">
+            <h1><%= dataPost.User.Profile.name %> - <%= dataPost.User.username %></h1>
+            <p class="mb-3"><%= dataPost.content %></p>
+            
+            <% if (dataPost.imageUrl) { %>
+            <img src="<%= dataPost.imageUrl %>" alt="Post Image" class="img-fluid mb-3" />
+            <% } %>
+            
+            <p><small class="text-muted">Posted on <%= formattedDate(dataPost.createdAt) %></small></p>
+            <p><small class="text-muted">Word Count: <%= dataPost.wordCount %></small></p>
+        </div>
+    </div>
 
-<%  %>
+    <div class="row mt-4">
+        <div class="col-md-6">
+            <form action="/posts/<%= dataPost.id %>/tag" method="post">
+                <div class="form-group">
+                    <label for="tagInput">Add a Tag:</label>
+                    <input type="text" name="tag" class="form-control" id="tagInput" placeholder="Enter a tag">
+                </div>
+                <button type="submit" class="btn btn-primary mt-3">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
 
 <%- include('partials/Footer') %>

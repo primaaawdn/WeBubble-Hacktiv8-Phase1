@@ -23,7 +23,6 @@ class ProfileController {
                     }
                 ]
             });
-            // res.send(dataProfile)
             res.render('UserProfileById', { dataProfile, formattedDate });
 		} catch (error) {
 			res.send(error.message);
@@ -116,8 +115,6 @@ class ProfileController {
 	static async editProfile(req, res) {
 		try {
 			const { userId, profileId } = req.params;
-			// const UserId = req.session.userId;
-			// const profileId = req.params.ProfileId;
 
 			const { name, gender, bio, group, profilePicture, joinedDate } = req.body;
 
