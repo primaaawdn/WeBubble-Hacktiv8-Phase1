@@ -34,6 +34,10 @@ class Controller {
             res.redirect('/posts');
         } catch (error) {
             res.send(error.message);
+            if(error.name === "SequelizeValidationError"){
+                let errors = error.errors.map(e => e.message)
+                res.send(errors)
+              }
         }
     }
     static logout(req, res) {

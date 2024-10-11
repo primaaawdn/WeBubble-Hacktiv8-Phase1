@@ -1,35 +1,35 @@
 const { User, Profile, Tag, Post, PostTag } = require("../models");
 
-class TagController{
-
-  static async getTag(req, res){
+class TagController {
+  static async getTag(req, res) {
     try {
-      const dataTag = await Tag.findAll()
-      // res.render('PostId', dataTag)
-      res.send({dataTag})
+      const dataTag = await Tag.findAll();
+      res.send({ dataTag });
     } catch (error) {
       console.log(error);
-      res.send(error)
+      res.status(500).send({ message: error.message });
     }
   }
 
   static async addNewTag(req, res) {
     const { tag } = req.body; 
+    const PostId = req.params.PostId; 
+    const UserId = req.session.userId;
 
     try {
-      await Tag.create({ tag });
-
-      res.redirect('/tags')
+      const newTag = await Tag.create({ tag });
+      const newPostTag = await PostTag.create({
+        PostId: PostId,
+        TagsId: newTag.id 
+      });
+      
+      res.redirect(`/posts/YourPost/${UserId}`, {newPostTag}); 
 
     } catch (error) {
-        res.status(500).send({ message: error.message });
+      console.error(error);
+      res.status(500).send({ message: error.message });
     }
   }
 }
 
-// const newPostTag = await PostTag.create({
-//   PostId: PostId,
-//   TagsId: newTag.id
-// });
-
-module.exports = TagController
+module.exports = TagController;

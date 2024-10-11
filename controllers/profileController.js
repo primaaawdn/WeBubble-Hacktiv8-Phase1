@@ -90,8 +90,10 @@ class ProfileController {
         console.log("Created Profile ID:", newProfile.id);
         res.redirect(`/users/${UserId}/profile/${newProfile.id}`);
     } catch (error) {
-        console.error(error);
-        res.status(500).send(error.message); // Kirim status 500 jika terjadi error
+			if(error.name === "SequelizeValidationError"){
+        let errors = error.errors.map(e => e.message)
+        res.send(errors)
+      } // Kirim status 500 jika terjadi error
     }
 }
 

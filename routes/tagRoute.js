@@ -10,14 +10,6 @@ router.use(function (req, res, next) {
   }
 })
 
-router.use(function(req, res, next){
-  if(!req.session.userId){
-    const error = 'Please login first!'
-    res.redirect(`/login?error=${error}`)
-  } else {
-    next()
-  }
-})
 
 router.post("/tags", TagController.getTag)
 router.post("/posts/:PostId/tag", TagController.addNewTag);

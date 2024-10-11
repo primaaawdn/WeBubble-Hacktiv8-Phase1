@@ -53,17 +53,20 @@ class UserController {
 			const existingUser = await User.findOne({ where: { username } });
 			if (existingUser) {
 				return res.status(400).send("Username already exists.");
-			} // nanti harus benerin validasi lagi
+			} 
 
 			const existingEmail = await User.findOne({ where: { email } });
 			if (existingEmail) {
 				return res.status(400).send("Email already exists.");
-			} // nanti harus benerin validasi lagi
+			} 
 
 			const newUser = await User.create({ username, email, password, role });
 			res.redirect("/login");
 		} catch (error) {
-			res.send(error.message);
+			if(error.name === "SequelizeValidationError"){
+        let errors = error.errors.map(e => e.message)
+        res.send(errors)
+      }
 		}
 	}
 }

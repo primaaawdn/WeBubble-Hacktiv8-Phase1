@@ -15,10 +15,44 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Profile.init({
-    name: DataTypes.STRING,
-    gender: DataTypes.STRING,
+    name: {
+      allowNull: false,
+      type: DataTypes.STRING,
+      validate: {
+        notEmpty: {
+          args: true,
+          msg: "Name must be input"
+        },
+        notNull: {
+          msg: "Name must be input"
+        }
+      }},
+    gender: {
+      allowNull: false,
+      type: DataTypes.STRING,
+      validate: {
+        notEmpty: {
+          args: true,
+          msg: "Gender must be input"
+        },
+        notNull: {
+          msg: "Gender must be input"
+        }
+      }
+    },
     bio: DataTypes.STRING,
-    group: DataTypes.STRING,
+    group: {
+      allowNull: false,
+      type: DataTypes.STRING,
+      validate: {
+        notEmpty: {
+          args: true,
+          msg: "Groupname must be input"
+        },
+        notNull: {
+          msg: "Groupname must be input"
+        }
+      }},
     profilePicture: DataTypes.STRING,
     joinedDate: DataTypes.DATE,
     UserId: {

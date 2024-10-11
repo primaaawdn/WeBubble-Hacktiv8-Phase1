@@ -18,13 +18,7 @@ class PostController {
 								model: Profile, 
 								attributes: ["name"],
 							},
-						// 	{
-						// 		model: PostTag,
-						// 		include: [{
-						// 				model: Tag,
-						// 				attributes: ['tag']
-						// 		}]
-						// }
+						
 						],
 					},
 				],
@@ -71,8 +65,8 @@ class PostController {
 			if (!userData) {
 				return res.status(404).send('User not found'); 
 			}
-			res.send({ userData }); 
-			// res.render('newPost', { userData }); 
+			// res.send({ userData }); 
+			res.render('newPost', { userData }); 
 		} catch (error) {
 			res.status(500).send(error.message); 
 		}
@@ -85,25 +79,30 @@ class PostController {
 			await Post.create({UserId: userId, content, imageUrl})
 			res.redirect('/posts');
 		} catch (error) {
-			res.send(error.message);
+			if(error.name === "SequelizeValidationError"){
+        let errors = error.errors.map(e => e.message)
+        res.send(errors)
+      }
 		}
 	}
 
 	static async YourPost(req, res) {
 		try {
-			const userId = req.session.userId; 
-			// console.log(req.session.userId);
-            const dataPost = await Post.findAll({
-                where: { UserId: userId }, 
-                order: [['createdAt', 'DESC']],
-            });
-			
-			// res.send(dataPost)
-            res.render('YourPost', { userId, dataPost, formattedDate }); 
-        } catch (error) {
-            res.status(500).send(error.message); 
-        }
-    }
+				const userId = req.session.userId;
+
+				const dataPost = await Post.findAll({
+					where: { UserId: userId },
+					order: [['createdAt', 'DESC']],
+					
+				});
+
+				// res.send({dataPost})
+
+				res.render('YourPost', { userId, dataPost, formattedDate }); 
+		} catch (error) {
+				res.status(500).send(error.message); 
+		}
+	}
 
 	static async getEdit(req, res) {
     

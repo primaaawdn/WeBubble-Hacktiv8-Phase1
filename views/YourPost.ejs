@@ -11,7 +11,7 @@
 		color: #333;
 	}
 	.btn-custom {
-		background-color: #87CEEB; /* Warna biru muda */
+		background-color: #87CEEB; 
 		color: white;
 		border: none;
 		padding: 10px 20px;
@@ -22,7 +22,7 @@
 		transition: background-color 0.3s;
 	}
 	.btn-custom:hover {
-		background-color: #00BFFF; /* Warna biru yang lebih gelap saat hover */
+		background-color: #00BFFF; 
 	}
 </style>
 
@@ -46,8 +46,17 @@
           				</small>
           			</p>
 
-          			<a href="/posts/YourPost/<%= userId %>/<%= post.id %>/edit" class="btn-custom" >Edit Post</a>
+          			<a href="/posts/YourPost/<%= userId %>/<%= post.id %>/edit" class="btn-custom">Edit Post</a>
           			<a href="/posts/YourPost/<%= userId %>/<%= post.id %>/delete" class="btn-custom">Delete Post</a>
+					
+					<form action="/posts/<%= post.id %>/tag" method="post">
+						<div class="form-group">
+							<label for="tag">Add a Tag:</label>
+							<input type="text" name="tag" class="form-control" id="tagInput" placeholder="Enter a tag">
+						</div>
+						<br>
+						<button type="submit" class="btn-custom">Submit</button> 
+					</form>
           
 				</div>
 			</div>
