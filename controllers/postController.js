@@ -1,9 +1,6 @@
 const { Post, User, Profile } = require("../models");
 const formattedDate = require("../helpers/formattedDate");
 
-const { Post, User, Profile, Tag, PostTag, sequelize } = require("../models");
-const { includes } = require("../validations/login.validation");
-
 class PostController {
 	static async getPost(req, res) {
 		try {
@@ -15,24 +12,14 @@ class PostController {
 						attributes: ["username"],
 						include: [
 							{
-								model: Profile, 
+								model: Profile,
 								attributes: ["name"],
 							},
-						// 	{
-						// 		model: PostTag,
-						// 		include: [{
-						// 				model: Tag,
-						// 				attributes: ['tag']
-						// 		}]
-						// }
 						],
 					},
 				],
-				
-
 				order: [["createdAt", "DESC"]],
 			});
-
 			const totalPosts = await Post.countTotalPosts();
 			res.render("Post", { dataPost, userId, formattedDate, totalPosts });
 		} catch (error) {
@@ -61,7 +48,6 @@ class PostController {
 			res.send(error.message);
 		}
 	}
-
 	static async createPost(req, res) {
 		try {
 			const userId = req.session.userId;
@@ -77,7 +63,6 @@ class PostController {
 			res.status(500).send(error.message);
 		}
 	}
-
 	static async postNewPost(req, res) {
 		const { content, imageUrl } = req.body;
 		const userId = req.session.userId;
@@ -88,7 +73,6 @@ class PostController {
 			res.send(error.message);
 		}
 	}
-
 	static async YourPost(req, res) {
 		try {
 			const userId = req.session.userId;
@@ -101,7 +85,6 @@ class PostController {
 			res.status(500).send(error.message);
 		}
 	}
-
 	static async getEdit(req, res) {
 		const PostId = req.params.PostId;
 		try {

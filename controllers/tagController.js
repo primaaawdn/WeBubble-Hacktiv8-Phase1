@@ -5,7 +5,7 @@ class TagController{
   static async getTag(req, res){
     try {
       const dataTag = await Tag.findAll()
-      // res.render('PostId', dataTag)
+
       res.send({dataTag})
     } catch (error) {
       console.log(error);
@@ -26,10 +26,5 @@ class TagController{
     }
   }
 }
-
-// const newPostTag = await PostTag.create({
-//   PostId: PostId,
-//   TagsId: newTag.id
-// });
 
 module.exports = TagController

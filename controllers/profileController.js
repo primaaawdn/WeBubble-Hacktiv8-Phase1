@@ -23,7 +23,6 @@ class ProfileController {
                     }
                 ]
             });
-            // res.send(dataProfile)
             res.render('UserProfileById', { dataProfile, formattedDate });
 		} catch (error) {
 			res.send(error.message);
@@ -91,7 +90,7 @@ class ProfileController {
         res.redirect(`/users/${UserId}/profile/${newProfile.id}`);
     } catch (error) {
         console.error(error);
-        res.status(500).send(error.message); // Kirim status 500 jika terjadi error
+        res.status(500).send(error.message);
     }
 }
 
@@ -114,8 +113,6 @@ class ProfileController {
 	static async editProfile(req, res) {
 		try {
 			const { userId, profileId } = req.params;
-			// const UserId = req.session.userId;
-			// const profileId = req.params.ProfileId;
 
 			const { name, gender, bio, group, profilePicture, joinedDate } = req.body;
 

@@ -22,8 +22,4 @@ router.use(function(req, res, next){
 router.post("/tags", TagController.getTag)
 router.post("/posts/:PostId/tag", TagController.addNewTag);
 
-// router.get("/posts/tags/:TagId");
-// router.get("/tags/:TagId/delete");
-
-
 module.exports = router;
