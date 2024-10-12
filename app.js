@@ -6,9 +6,9 @@ const upload = multer({ dest: 'uploads/' })
 const app = express();
 const port = 3000;
 
-app.post('/upload', upload.single('file'), (req, res) => {
-    res.send('File uploaded successfully.');
-  });
+// app.post('/upload', upload.single('file'), (req, res) => {
+//     res.send('File uploaded successfully.');
+//   });
 
 const router = require('./routes/index');
 const userRoute = require('./routes/userRoute');

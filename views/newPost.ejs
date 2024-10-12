@@ -4,7 +4,7 @@
 <div class="container my-4">
     <h3 class="text-center mb-4">Are you ready to tell your stories, <%= userData.username %>?</h3>
 
-    <form action="/users/<%= userData.id %>/posts/create" method="post" enctype="multipart/form-data">
+    <form action="/users/<%= userData.id %>/posts/create" method="post">
         <div class="form-group">
             <label for="exampleFormControlTextarea1">Write your stories here~</label>
             <textarea name="content" class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>

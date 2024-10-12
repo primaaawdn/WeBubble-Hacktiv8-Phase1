@@ -23,7 +23,7 @@ class TagController {
         TagsId: newTag.id 
       });
       
-      res.redirect(`/posts/YourPost/${UserId}`, {newPostTag}); 
+      res.redirect(`/posts/${PostId}/tag`, {newPostTag}); 
 
     } catch (error) {
       console.error(error);
