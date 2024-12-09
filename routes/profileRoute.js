@@ -1,27 +1,25 @@
+const express = require("express");
 const ProfileController = require("../controllers/profileController");
-const router = require("express").Router();
-const uploadController = require('../controllers/uploadController');
+const router = express.Router();
+const upload = require("../middleware/upload");
 
-router.use(function (req, res, next) {
-    if (!req.session.userId) {
-        const error = `Please login first`;
-        return res.redirect(`/login?srror=${error}`);
-    } else {
-        next();
-    }
+router.use((req, res, next) => {
+	if (!req.session.userId) {
+		const error = "Please login first";
+		return res.redirect(`/login?error=${error}`);
+	}
+	next();
 });
 
 router.get("/profile", ProfileController.profilePage);
-router.get("/users/:UserId/profile", ProfileController.getProfile);
-router.get("/users/:UserId/profile/create", ProfileController.createForm);
-
-
-router.post("/users/:UserId/profile/create", 
-    uploadController.uploadMiddleware, 
-    ProfileController.createProfile 
+router.get("/users/:UserId/profile", ProfileController.getProfile); 
+router.get("/users/:UserId/profile/create", ProfileController.createForm); 
+router.post(
+	"/users/:UserId/profile/create",
+	upload.single('profilePicture'),
+	ProfileController.createProfile 
 );
-
-router.get("/users/:UserId/profile/edit/:ProfileId", ProfileController.editProfileForm);
-router.post("/users/:UserId/profile/edit/:ProfileId", ProfileController.editProfile);
+router.get("/users/:UserId/profile/edit", ProfileController.editProfileForm); 
+router.post("/users/:UserId/profile/edit", ProfileController.editProfile); 
 
 module.exports = router;
