@@ -1,44 +1,84 @@
-<%- include('partials/Header') %>
-<%- include('partials/NavBar') %>
+<%- include('partials/Header') %> <%- include('partials/NavBar') %>
 
 <div class="container my-4">
-    <h2 class="text-center mb-4"><%= dataProfile.name %>'s Profile</h2>
-    
-    <div class="row justify-content-center mb-4">
-        <div class="col-md-4">
-            <div class="card shadow-sm text-center">
-                <% if (dataProfile.profilePicture) { %>
-                    <img src="<%= dataProfile.profilePicture %>" class="card-img-top rounded-circle" alt="Profile Picture" style="width: 150px; height: 150px; object-fit: cover; margin: 15px auto;">
-                <% } else { %>
-                    <img src="/images/default-profile.png" class="card-img-top rounded-circle" alt="Default Profile Picture" style="width: 150px; height: 150px; object-fit: cover; margin: 15px auto;">
-                <% } %>
-                <div class="card-body">
-                    <p class="card-text"><strong>Gender:</strong> <%= dataProfile.gender %></p>
-                    <p class="card-text"><strong>Group:</strong> <%= dataProfile.group %></p>
-                    <p class="card-text"><strong>Joined:</strong> <%= formattedDate(dataProfile.joinedDate) %></p>
-                    <p class="card-text"><strong>Bio:</strong> <%= dataProfile.bio || 'No bio available' %></p>
-                </div>
-            </div>
-        </div>
-    </div>
+	<h2 class="text-center mb-4"><%= dataProfile.name %>'s Profile</h2>
 
-    <h4 class="mb-4"><%= dataProfile.name %>'s Posts</h4>
-    <div class="row justify-content-start">
-        <% if (dataProfile.User && dataProfile.User.Posts && dataProfile.User.Posts.length > 0) { %>
-            <% dataProfile.User.Posts.forEach(post => { %>
-                <div class="col-md-4 mb-3">
-                    <div class="card shadow-sm">
-                        <div class="card-body">
-                            <p class="card-text"><%= post.content %></p>
-                            <p class="card-text"><small class="text-muted">Posted on: <%= formattedDate(post.createdAt) %></small></p>
-                        </div>
-                    </div>
-                </div>
-            <% }) %>
-        <% } else { %>
-            <p>No post has been made.</p>
-        <% } %>
-    </div>
+	<div class="row justify-content-center mb-4">
+		<div class="col-md-4">
+			<div class="card shadow-sm text-center">
+				<% if (dataProfile.profilePicture) { %>
+				<img
+					src="<%= dataProfile.profilePicture %>"
+					class="card-img-top rounded-circle"
+					alt="Profile Picture"
+					style="
+						width: 150px;
+						height: 150px;
+						object-fit: cover;
+						margin: 15px auto;
+					" />
+				<% } else { %>
+				<img
+					src="/images/default-profile.png"
+					class="card-img-top rounded-circle"
+					alt="Default Profile Picture"
+					style="
+						width: 150px;
+						height: 150px;
+						object-fit: cover;
+						margin: 15px auto;
+					" />
+				<% } %>
+				<div class="card-body">
+					<p class="card-text">
+						<strong>Gender:</strong> <%= dataProfile.gender %>
+					</p>
+					<p class="card-text">
+						<strong>Group:</strong> <%= dataProfile.group %>
+					</p>
+					<p class="card-text">
+						<strong>Joined:</strong> <%= formattedDate(dataProfile.joinedDate)
+						%>
+					</p>
+					<p class="card-text">
+						<strong>Bio:</strong> <%= dataProfile.bio || 'No bio available' %>
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<% if (loggedInUser && loggedInUser === dataProfile.User.id) { %>
+	<div class="text-center">
+		<a
+			href="/users/<%= dataProfile.User.id %>/profile/edit"
+			class="btn btn-info"
+			>Edit Profile</a
+		>
+	</div>
+	<% } %>
+
+	<h4 class="mb-4"><%= dataProfile.name %>'s Posts</h4>
+	<div class="row justify-content-start">
+		<% if (dataProfile.User && dataProfile.User.Posts &&
+		dataProfile.User.Posts.length > 0) { %> <%
+		dataProfile.User.Posts.forEach(post => { %>
+		<div class="col-md-4 mb-3">
+			<div class="card shadow-sm">
+				<div class="card-body">
+					<p class="card-text"><%= post.content %></p>
+					<p class="card-text">
+						<small class="text-muted"
+							>Posted on: <%= formattedDate(post.createdAt) %></small
+						>
+					</p>
+				</div>
+			</div>
+		</div>
+		<% }) %> <% } else { %>
+		<p>No post has been made.</p>
+		<% } %>
+	</div>
 </div>
 
 <%- include('partials/Footer') %>
