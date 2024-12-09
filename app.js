@@ -1,26 +1,30 @@
 const express = require("express");
 const session = require('express-session');
-const multer = require('multer');
+// const multer = require('multer');
 const path = require('path');
+const upload = require('./middleware/upload'); 
 
 
-const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, 'uploads/'); 
-    },
-    filename: function (req, file, cb) {
-        cb(null, Date.now() + path.extname(file.originalname)); 
-    }
-});
+// const storage = multer.diskStorage({
+//     destination: function (req, file, cb) {
+//         cb(null, 'uploads/'); 
+//     },
+//     filename: function (req, file, cb) {
+//         cb(null, Date.now() + path.extname(file.originalname)); 
+//     }
+// });
 
 
-const upload = multer({ storage: storage });
+// const upload = multer({ storage: storage });
+
+
 const app = express();
 const port = 3000;
 
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 app.use(session({
     secret: 'yourSecretKey',
