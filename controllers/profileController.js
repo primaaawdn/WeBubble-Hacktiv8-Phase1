@@ -24,6 +24,8 @@ class ProfileController {
 				],
 			});
 
+			// console.log(dataProfile.dataValues.profilePicture);
+
 			if (!dataProfile) {
 				return res.redirect(`/users/${UserId}/profile/create`);
 			}
@@ -46,7 +48,8 @@ class ProfileController {
 			const user = await User.findByPk(UserId);
 			const userProfile = await Profile.findOne({ where: { UserId } });
 
-			const hasProfile = !!userProfile;
+			const hasProfile = userProfile;
+
 
 			res.render("ProfilePage", { hasProfile, UserId, user });
 		} catch (error) {

@@ -1,14 +1,16 @@
 <%- include('partials/Header') %> <%- include('partials/NavBar') %>
 
+
+
 <div class="container my-4">
 	<h2 class="text-center mb-4"><%= dataProfile.name %>'s Profile</h2>
 
 	<div class="row justify-content-center mb-4">
 		<div class="col-md-4">
 			<div class="card shadow-sm text-center">
-				<% if (dataProfile.profilePicture) { %>
+				<% if (dataProfile.dataValues.profilePicture) { %>
 				<img
-					src="<%= dataProfile.profilePicture %>"
+					src="/<%= dataProfile.dataValues.profilePicture %>"
 					class="card-img-top rounded-circle"
 					alt="Profile Picture"
 					style="

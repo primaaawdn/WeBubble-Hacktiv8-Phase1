@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
 
     static associate(models) {
       Post.hasMany(models.PostTag);
-      Post.belongsTo(models.User);
+      Post.belongsTo(models.User, { foreignKey: 'UserId' });
     }
 
     static async countTotalPosts() {
