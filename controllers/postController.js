@@ -45,6 +45,8 @@ class PostController {
           },
         ],
       });
+
+      // console.log(dataPost);
       res.render("PostId", { dataPost, formattedDate });
     } catch (error) {
       res.send(error.message);
