@@ -45,7 +45,7 @@ router.get("/users/:UserId/posts/create", PostController.createPost);
 router.post("/users/:UserId/posts/create", upload.single('imageUrl'), PostController.postNewPost);
 router.get("/posts/YourPost/:UserId", PostController.YourPost);
 router.get("/posts/YourPost/:UserId/:PostId/edit", PostController.getEdit);
-router.post("/posts/YourPost/:UserId/:PostId/edit", PostController.postEdit);
+router.post("/posts/YourPost/:UserId/:PostId/edit", upload.single('imageUrl'), PostController.postEdit);
 router.get("/posts/YourPost/:UserId/:PostId/delete", PostController.removePost);
 
 module.exports = router;

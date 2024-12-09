@@ -45,11 +45,11 @@
         height: 200px; 
         overflow: hidden;
     }
-    .bio-text {
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-    }
+    /* .bio-text {
+        overflow: visible;
+        text-overflow: clip;
+        white-space: normal;
+    } */
     h6 {
         margin-top: 20px; 
     }
@@ -72,7 +72,7 @@
                     <img src="/<%= post.imageUrl %>" class="card-img-top" alt="Post Image" />
                 <% } %>
                 <div class="card-body d-flex flex-column"> 
-                    <p class="card-text bio-text"><%= post.content %></p>
+                    <p class="card-text"><%= post.content %></p>
                     <% if(post.User && post.User.Profile) { %>
                         <p class="card-text">
                             <small class="text-muted">
@@ -81,8 +81,6 @@
                             </small>
                         </p>
                     <% } %>
-
-				    <p><%= post.content %></p>
                   
 				    <a href="/posts/YourPost/<%= userId %>/<%= post.id %>/edit" class="btn-custom" >Edit Post</a>
                     <a href="/posts/YourPost/<%= userId %>/<%= post.id %>/delete" class="btn-custom">Delete Post</a>
