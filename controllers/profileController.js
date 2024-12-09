@@ -1,5 +1,7 @@
-const formattedDate = require("../helpers/formattedDate");
 const { User, Profile, Post } = require("../models");
+const upload = require("../middleware/upload"); 
+const formattedDate = require("../helpers/formattedDate");
+const formattedText = require("../helpers/formattedText");
 
 class ProfileController {
 	static async getProfile(req, res) {
@@ -12,27 +14,30 @@ class ProfileController {
 					{
 						model: User,
 						as: "User",
-						attributes: ["id", "username", "email"],
+						attributes: ["id", "username", "email", "role"],
 						include: [
 							{
 								model: Post,
 								as: "Posts",
-								attributes: ["id", "content", "createdAt"],
+								attributes: ["id", "imageUrl", "content", "createdAt"],
 							},
 						],
 					},
 				],
 			});
+<<<<<<< HEAD
 
 			// console.log(dataProfile.dataValues.profilePicture);
 
+=======
+			
+>>>>>>> cb84c29cf884b0543878fa6e1f6c22cd2652b8e1
 			if (!dataProfile) {
 				return res.redirect(`/users/${UserId}/profile/create`);
 			}
 
 			const loggedInUser = req.session.userId;
-
-			res.render("UserProfileById", { dataProfile, formattedDate, loggedInUser });
+			res.render("UserProfileById", { dataProfile, formattedDate, formattedText, loggedInUser });
 		} catch (error) {
 			res.status(500).send(error.message);
 		}
@@ -49,7 +54,10 @@ class ProfileController {
 			const userProfile = await Profile.findOne({ where: { UserId } });
 
 			const hasProfile = userProfile;
+<<<<<<< HEAD
 
+=======
+>>>>>>> cb84c29cf884b0543878fa6e1f6c22cd2652b8e1
 
 			res.render("ProfilePage", { hasProfile, UserId, user });
 		} catch (error) {
@@ -87,18 +95,13 @@ class ProfileController {
 
 			res.redirect(`/users/${UserId}/profile`);
 		} catch (error) {
-			if (error.name === "SequelizeValidationError") {
-				const errors = error.errors.map((e) => e.message);
-				res.status(400).send(errors);
-			} else {
-				res.status(500).send(error.message);
-			}
+			res.status(500).send(error.message);
 		}
 	}
 
 	static async editProfileForm(req, res) {
 		try {
-			const { UserId } = req.params;
+			const UserId = req.session.userId;
 
 			const userProfile = await Profile.findOne({
 				where: { UserId },
@@ -116,8 +119,13 @@ class ProfileController {
 
 	static async editProfile(req, res) {
 		try {
-			const { UserId } = req.params;
-			const { name, gender, bio, group, profilePicture, joinedDate } = req.body;
+			const UserId = req.session.userId;
+			const { name, gender, bio, group, joinedDate } = req.body;
+			const userProfile = await Profile.findOne({ where: { UserId } });
+
+			const profilePicture = req.file
+				? `uploads/${req.file.filename}`
+				: userProfile.profilePicture;
 
 			const updatedFields = {
 				name,

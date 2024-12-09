@@ -20,6 +20,6 @@ router.post(
 	ProfileController.createProfile 
 );
 router.get("/users/:UserId/profile/edit", ProfileController.editProfileForm); 
-router.post("/users/:UserId/profile/edit", ProfileController.editProfile); 
+router.post("/users/:UserId/profile/edit", upload.single('profilePicture'), ProfileController.editProfile); 
 
 module.exports = router;

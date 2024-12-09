@@ -1,6 +1,17 @@
 <%- include('partials/Header') %>
 <%- include('partials/NavBar') %>
 
+<style>
+    .card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+        transform: translateY(-5px); 
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); 
+    }
+</style>
+
 <div class="container my-4">
     <h2 class="mb-4">Talents and Managers</h2>
 
@@ -8,8 +19,8 @@
         <form action="/users" method="GET" class="form-inline">
             <select name="role" class="form-control mr-2" onchange="this.form.submit()">
                 <option value="">All</option>
-                <option value="idol" <%= role === 'idol' ? 'selected' : '' %>>Idol</option>
-                <option value="manager" <%= role === 'manager' ? 'selected' : '' %>>Manager</option>
+                <option value="idol" <%= role === 'idol' ? 'selected' : '' %>>Idols</option>
+                <option value="manager" <%= role === 'manager' ? 'selected' : '' %>>Managers</option>
             </select>
         </form>
 
