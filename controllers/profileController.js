@@ -1,33 +1,41 @@
 const formattedDate = require("../helpers/formattedDate");
-const { User, Profile, Tag, Post, PostTag } = require("../models");
-
+const { User, Profile, Post } = require("../models");
 
 class ProfileController {
 	static async getProfile(req, res) {
 		try {
-			const userId = req.params.UserId;
+			const { UserId } = req.params;
+
 			const dataProfile = await Profile.findOne({
-                where: { UserId: userId },
-                include: [
-                    {
-                        model: User,
-                        as: 'User',
-                        attributes: ['id', 'username', 'email'], 
-                        include: [
-                            {
-                                model: Post,
-                                as: 'Posts', 
-                                attributes: ['id', 'content', 'createdAt']
-                            }
-                        ]
-                    }
-                ]
-            });
-            res.render('UserProfileById', { dataProfile, formattedDate });
+				where: { UserId },
+				include: [
+					{
+						model: User,
+						as: "User",
+						attributes: ["id", "username", "email"],
+						include: [
+							{
+								model: Post,
+								as: "Posts",
+								attributes: ["id", "content", "createdAt"],
+							},
+						],
+					},
+				],
+			});
+
+			if (!dataProfile) {
+				return res.redirect(`/users/${UserId}/profile/create`);
+			}
+
+			const loggedInUser = req.session.userId;
+
+			res.render("UserProfileById", { dataProfile, formattedDate, loggedInUser });
 		} catch (error) {
-			res.send(error.message);
+			res.status(500).send(error.message);
 		}
 	}
+
 	static async profilePage(req, res) {
 		try {
 			const UserId = req.session.userId;
@@ -35,23 +43,14 @@ class ProfileController {
 				return res.redirect("/login");
 			}
 
-			const user = await User.findOne({
-				where: { id: UserId },
-			});
+			const user = await User.findByPk(UserId);
+			const userProfile = await Profile.findOne({ where: { UserId } });
 
-			const userProfile = await Profile.findOne({
-				where: { UserId },
-			});
-
-			let hasProfile = false;
-
-			if (userProfile) {
-				hasProfile = true;
-			}
+			const hasProfile = !!userProfile;
 
 			res.render("ProfilePage", { hasProfile, UserId, user });
 		} catch (error) {
-			res.send(error.message);
+			res.status(500).send(error.message);
 		}
 	}
 
@@ -60,83 +59,83 @@ class ProfileController {
 			const UserId = req.session.userId;
 			res.render("CreateProfile", { UserId });
 		} catch (error) {
-			res.send(error.message);
+			res.status(500).send(error.message);
 		}
 	}
 
 	static async createProfile(req, res) {
-    try {
-        const UserId = req.session.userId;
+		try {
+			const UserId = req.session.userId;
+			const { name, gender, bio, group } = req.body;
+			const profilePicture = req.file ? `uploads/${req.file.filename}` : null;
+			const joinedDate = req.body.joinedDate
+				? new Date(req.body.joinedDate)
+				: new Date();
 
-        const { name, gender, bio, group } = req.body;
+			const newProfile = await Profile.create({
+				UserId,
+				name,
+				gender,
+				bio,
+				group,
+				profilePicture,
+				joinedDate,
+			});
 
-        const profilePicture = req.file ? req.file.path : null; 
-
-        
-        const joinedDate = req.body.joinedDate ? new Date(req.body.joinedDate) : new Date();
-
-        
-        const newProfile = await Profile.create({
-            UserId: UserId,
-            name: name,
-            gender: gender,
-            bio: bio,
-            group: group,
-            profilePicture: profilePicture,
-            joinedDate: joinedDate,
-        });
-
-        console.log("Created Profile ID:", newProfile.id);
-        res.redirect(`/users/${UserId}/profile/${newProfile.id}`);
-    } catch (error) {
-			if(error.name === "SequelizeValidationError"){
-        let errors = error.errors.map(e => e.message)
-        res.send(errors)
-      } // Kirim status 500 jika terjadi error
-    }
-}
+			res.redirect(`/users/${UserId}/profile`);
+		} catch (error) {
+			if (error.name === "SequelizeValidationError") {
+				const errors = error.errors.map((e) => e.message);
+				res.status(400).send(errors);
+			} else {
+				res.status(500).send(error.message);
+			}
+		}
+	}
 
 	static async editProfileForm(req, res) {
 		try {
-			const { UserId, ProfileId } = req.params;
+			const { UserId } = req.params;
+
 			const userProfile = await Profile.findOne({
-				where: { id: ProfileId, UserId: UserId },
+				where: { UserId },
 			});
 
 			if (!userProfile) {
 				return res.status(404).send("Profile not found");
 			}
-			res.render("EditProfile", { user: userProfile, UserId: UserId });
+
+			res.render("EditProfile", { user: userProfile, UserId });
 		} catch (error) {
-			res.send(error.message);
+			res.status(500).send(error.message);
 		}
 	}
 
 	static async editProfile(req, res) {
 		try {
-			const { userId, profileId } = req.params;
-
+			const { UserId } = req.params;
 			const { name, gender, bio, group, profilePicture, joinedDate } = req.body;
 
-			const parsedJoinedDate = joinedDate ? new Date(joinedDate) : new Date();
+			const updatedFields = {
+				name,
+				gender,
+				bio,
+				group,
+				profilePicture,
+				joinedDate: joinedDate ? new Date(joinedDate) : new Date(),
+			};
 
-			await Profile.update(
-				{
-					name: name,
-					gender: gender,
-					bio: bio,
-					group: group,
-					profilePicture: profilePicture,
-					joinedDate: parsedJoinedDate,
-				},
-				{
-					where: { id: profileId, UserId: userId },
-				}
-			);
+			const [updatedRows] = await Profile.update(updatedFields, {
+				where: { UserId },
+			});
 
-			res.redirect(`/users/${userId}/profile/${profileId}`);
+			if (!updatedRows) {
+				return res.status(404).send("Profile not found or no changes made");
+			}
+
+			res.redirect(`/users/${UserId}/profile`);
 		} catch (error) {
-			res.send(error.message);
+			res.status(500).send(error.message);
 		}
 	}
 }
