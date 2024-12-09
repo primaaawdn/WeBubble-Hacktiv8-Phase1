@@ -25,13 +25,7 @@ class ProfileController {
 					},
 				],
 			});
-<<<<<<< HEAD
-
-			// console.log(dataProfile.dataValues.profilePicture);
-
-=======
 			
->>>>>>> cb84c29cf884b0543878fa6e1f6c22cd2652b8e1
 			if (!dataProfile) {
 				return res.redirect(`/users/${UserId}/profile/create`);
 			}
@@ -54,10 +48,6 @@ class ProfileController {
 			const userProfile = await Profile.findOne({ where: { UserId } });
 
 			const hasProfile = userProfile;
-<<<<<<< HEAD
-
-=======
->>>>>>> cb84c29cf884b0543878fa6e1f6c22cd2652b8e1
 
 			res.render("ProfilePage", { hasProfile, UserId, user });
 		} catch (error) {
