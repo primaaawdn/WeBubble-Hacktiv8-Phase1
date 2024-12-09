@@ -19,8 +19,8 @@
         <form action="/users" method="GET" class="form-inline">
             <select name="role" class="form-control mr-2" onchange="this.form.submit()">
                 <option value="">All</option>
-                <option value="idol" <%= role === 'idol' ? 'selected' : '' %>>Idol</option>
-                <option value="manager" <%= role === 'manager' ? 'selected' : '' %>>Manager</option>
+                <option value="idol" <%= role === 'idol' ? 'selected' : '' %>>Idols</option>
+                <option value="manager" <%= role === 'manager' ? 'selected' : '' %>>Managers</option>
             </select>
         </form>
 
