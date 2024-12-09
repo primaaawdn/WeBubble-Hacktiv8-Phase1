@@ -63,19 +63,28 @@ class PostController {
 			res.status(500).send(error.message);
 		}
 	}
+
 	static async postNewPost(req, res) {
-		const { content, imageUrl } = req.body;
-		const userId = req.session.userId;
+		const { content } = req.body;
+		const userId = req.session.userId; 
+		const imageUrl = req.file ? `uploads/${req.file.filename}` : null; 
 		try {
-			await Post.create({ UserId: userId, content, imageUrl });
-			res.redirect("/posts");
+			await Post.create({
+				UserId: userId,
+				content,
+				imageUrl,
+				});
+				res.redirect("/posts");
 		} catch (error) {
-			if(error.name === "SequelizeValidationError"){
-        let errors = error.errors.map(e => e.message)
-        res.send(errors)
-      }
+			if (error.name === "SequelizeValidationError") {
+				let errors = error.errors.map((e) => e.message);
+				res.status(400).send(errors);
+				} else {
+				res.status(500).send("Terjadi kesalahan pada server.");
+				}
 		}
 	}
+
 	static async YourPost(req, res) {
 		try {
 			const userId = req.session.userId;
