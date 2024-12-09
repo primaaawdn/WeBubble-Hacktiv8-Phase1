@@ -80,7 +80,7 @@ class PostController {
 				let errors = error.errors.map((e) => e.message);
 				res.status(400).send(errors);
 				} else {
-				res.status(500).send("Terjadi kesalahan pada server.");
+				res.status(500).send("there's an error in our end");
 				}
 		}
 	}
@@ -97,10 +97,25 @@ class PostController {
 			res.status(500).send(error.message);
 		}
 	}
+	
 	static async getEdit(req, res) {
 		const PostId = req.params.PostId;
 		try {
-			const userData = await Post.findByPk(PostId);
+			const userData = await Post.findByPk(PostId, {
+				include: [
+					{
+						model: User,
+						attributes: ["username"],
+						include: [
+							{
+								model: Profile,
+								attributes: ["name"],
+							},
+						],
+					},
+				],
+			});
+			// console.log(userData.User.dataValues.username);
 			res.render("EditPost", { userData });
 		} catch (error) {
 			res.status(500).send(error.message);
@@ -108,7 +123,8 @@ class PostController {
 	}
 
 	static async postEdit(req, res) {
-		const { content, imageUrl } = req.body;
+		const { content } = req.body;
+		const imageUrl = req.file ? `uploads/${req.file.filename}` : null; 
 		const userId = req.session.userId;
 		const PostId = req.params.PostId;
 		try {
