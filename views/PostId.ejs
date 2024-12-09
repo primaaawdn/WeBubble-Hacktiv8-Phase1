@@ -8,7 +8,7 @@
             <p class="mb-3"><%= dataPost.content %></p>
             
             <% if (dataPost.imageUrl) { %>
-            <img src="<%= dataPost.imageUrl %>" alt="Post Image" class="img-fluid mb-3" />
+            <img src="/<%= dataPost.imageUrl %>" alt="Post Image" class="img-fluid mb-3" />
             <% } %>
             
             <p><small class="text-muted">Posted on <%= formattedDate(dataPost.createdAt) %></small></p>

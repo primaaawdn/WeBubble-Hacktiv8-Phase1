@@ -13,42 +13,42 @@ module.exports = (sequelize, DataTypes) => {
 		{
 			username: {
 				allowNull: false,
-      	type: DataTypes.STRING,
-      	validate: {
-        notEmpty: {
-          args: true,
-          msg: "Username must be input"
-        },
-        notNull: {
-          msg: "Username must be input"
-        }
-      }
-			},
-			email: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        unique: true,
-        validate: {
+				type: DataTypes.STRING,
+				validate: {
 					notEmpty: {
 						args: true,
-						msg: "Username must be input"
+						msg: "Username must be input",
 					},
 					notNull: {
-						msg: "Username must be input"
+						msg: "Username must be input",
 					},
-          isEmail: true,
-        }
-      },
+				},
+			},
+			email: {
+				type: DataTypes.STRING,
+				allowNull: false,
+				unique: true,
+				validate: {
+					notEmpty: {
+						args: true,
+						msg: "Username must be input",
+					},
+					notNull: {
+						msg: "Username must be input",
+					},
+					isEmail: true,
+				},
+			},
 			password: {
 				allowNull: false,
 				type: DataTypes.STRING,
 				notEmpty: {
-          args: true,
-          msg: "Password must be input"
-        },
-        notNull: {
-          msg: "Password must be input"
-        }
+					args: true,
+					msg: "Password must be input",
+				},
+				notNull: {
+					msg: "Password must be input",
+				},
 			},
 			role: DataTypes.STRING,
 		},

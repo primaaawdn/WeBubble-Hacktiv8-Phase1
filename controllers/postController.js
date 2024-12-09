@@ -142,7 +142,7 @@ class PostController {
 
     
       if (newImage && post.imageUrl) {
-        const oldImagePath = path.join(__dirname, "../", post.imageUrl); // Path lengkap ke gambar lama
+        const oldImagePath = path.join(__dirname, "../", post.imageUrl);
         fs.unlink(oldImagePath, (err) => {
           if (err) {
             console.error("Error deleting old file:", err.message);
