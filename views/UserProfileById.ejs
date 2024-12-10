@@ -1,5 +1,13 @@
 <%- include('partials/Header') %> <%- include('partials/NavBar') %>
 
+<style>
+	.card:hover {
+		transform: scale(1.05);
+	}
+	.card-text {
+		color: #333;
+	}
+</style>
 
 <div class="container my-4">
 	<h2 class="text-center mb-4"><%= dataProfile.name %></h2>
@@ -68,7 +76,7 @@
 		dataProfile.User.Posts.length > 0) { %> <%
 		dataProfile.User.Posts.forEach(post => { %>
 		<div class="col-md-4 mb-3">
-			<a href="/posts/<%= post.id %>" class="text-decoration-none">
+			<a href="/posts/<%= post.id %>">
 				<div class="card shadow-sm">
 					<div class="card-body">
 						<img
@@ -79,7 +87,7 @@
 						<p class="card-text"><%= post.content %></p>
 						<p class="card-text">
 							<small class="text-muted"
-								>Posted on: <%= formattedDate(post.createdAt) %></small
+								><%= formattedDate(post.createdAt) %></small
 							>
 						</p>
 					</div>

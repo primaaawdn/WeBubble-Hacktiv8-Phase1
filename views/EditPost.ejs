@@ -1,26 +1,43 @@
-<%- include('partials/Header') %>
-<%- include('partials/NavBar') %>
+<%- include('partials/Header') %> <%- include('partials/NavBar') %>
 
 <div class="container my-4">
-    <h3 class="text-center mb-4">Edit your post, <%= userData.User.dataValues.username %>!</h3>
-    
-    <form action="/posts/YourPost/<%= userData.UserId %>/<%= userData.id %>/edit" method="post" enctype="multipart/form-data">
-       
-        <div class="form-group">
-            <label for="exampleFormControlTextarea1">Edit your story here!</label>
-            <textarea name="content" class="form-control" id="exampleFormControlTextarea1" rows="5"><%= userData.content %></textarea>
-            <h6 class="card-subtitle text-muted">Posted by <%= userData.User.dataValues.username %> on <%= userData.createdAt %></h6>
-        </div>
+	<h3 class="text-center mb-4">
+		Edit your post, <%= formattedText(userData.User.dataValues.username) %>!
+	</h3>
 
-       
-        <div class="form-group">
-            <label for="imageUrl">Upload a new image (optional)</label>
-            <input class="form-control-file" type="file" name="imageUrl" id="imageUrl">
-        </div>
+	<form
+		action="/posts/YourPost/<%= userData.UserId %>/<%= userData.id %>/edit"
+		method="post"
+		enctype="multipart/form-data">
+		<div class="form-group">
+			<label for="exampleFormControlTextarea1" class="mb-1"
+				>Edit your story here!</label
+			>
+			<textarea
+				name="content"
+				class="form-control"
+				id="exampleFormControlTextarea1"
+				rows="5"> <%= userData.content %>
+                </textarea>
+			<h6 class="card-subtitle text-muted mt-2">
+				Posted by <%= userData.User.Profile.name %> (<%=
+				userData.User.dataValues.username %>) on <%=
+				formattedDate(userData.createdAt) %> <%=
+				formattedTime(userData.createdAt) %>
+			</h6>
+		</div>
 
-        
-        <button class="btn btn-primary mt-3" type="submit">Save Changes</button>
-    </form>
+		<div class="form-group my-4">
+			<label for="imageUrl">Upload a new image (optional)</label>
+			<input
+				class="form-control-file"
+				type="file"
+				name="imageUrl"
+				id="imageUrl" />
+		</div>
+
+		<button class="btn btn-primary" type="submit">Save Changes</button>
+	</form>
 </div>
 
 <%- include('partials/footer') %>

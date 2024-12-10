@@ -1,108 +1,126 @@
-<%- include('partials/Header') %>
-<%- include('partials/NavBar') %>
+<%- include('partials/Header') %> <%- include('partials/NavBar') %>
 
 <style>
-    body {
-        background-color: #ffffff;
-    }
-    .card {
-        background-color: white;
-        border: none;
-        transition: transform 0.3s; 
-        height: 100%; 
-    }
-    .card:hover {
-        transform: scale(1.05);
-    }
-    .card-text {
-        color: #333;
-    }
-    .btn-custom {
-        background-color: #87CEEB; 
-        color: white;
-        border: none;
-        padding: 5px 10px; 
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        border-radius: 5px;
-        transition: background-color 0.3s, transform 0.3s;
-        cursor: pointer;
-        font-size: 14px; 
-    }
-    .btn-custom:hover {
-        background-color: #00BFFF; 
-        transform: scale(1.05); 
-    }
-    .card-img-top {
-        height: 200px; 
-        object-fit: cover; 
-    }
-    .card-body {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between; 
-        height: 200px; 
-        overflow: hidden;
-    }
-    /* .bio-text {
-        overflow: visible;
-        text-overflow: clip;
-        white-space: normal;
-    } */
-    h6 {
-        margin-top: 20px; 
-    }
+	body {
+		background-color: #ffffff;
+	}
+	.card {
+		background-color: white;
+		border: none;
+		transition: transform 0.3s;
+		height: 100%;
+	}
+	.card:hover {
+		transform: scale(1.05);
+	}
+	.card-text {
+		color: #333;
+	}
+	.btn-custom {
+		background-color: #87ceeb;
+		color: black;
+		border: none;
+		padding: 5px 10px;
+		text-align: center;
+		text-decoration: none;
+		display: inline-block;
+		border-radius: 5px;
+		transition: background-color 0.3s, transform 0.3s;
+		cursor: pointer;
+		font-size: 14px;
+	}
+	.btn-custom:hover {
+		background-color: #00bfff;
+		color: white;
+		transform: scale(1.05);
+	}
+	.card-img-top {
+		height: 200px;
+		width: 100%;
+		object-fit: cover;
+	}
+	.card-body {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		height: 200px;
+		overflow: hidden;
+	}
+	h6 {
+		margin-top: 20px;
+	}
+	.btn-group {
+		display: flex;
+		gap: 10px;
+	}
+	.small-text {
+		font-size: 15px;
+	}
+	.large-text {
+		font-size: 20px;
+	}
 </style>
 
 <div class="container my-4">
-    <div class="row mb-4">
-        <div class="col-md-4">
-            <a href="/users/<%= userId %>/posts/create" class="btn btn-custom mb-4">Add new Post</a>
-        </div>
-    </div>
+	<div class="row mb-4">
+		<div class="col-md-4">
+			<a href="/users/<%= userId %>/posts/create" class="btn btn-custom mb-4"
+				>Add new Post</a
+			>
+		</div>
+	</div>
 
-    <h2 class="text-center mb-4">All Posts</h2>
-    <div class="row">
-        <% dataPost.forEach(post => { %>
-					
-        <div class="col-md-4 mb-4">
-            <div class="card shadow-sm h-100"> 
-                <% if (post.imageUrl) { %>
-                    <img src="/<%= post.imageUrl %>" class="card-img-top" alt="Post Image" />
-                <% } %>
-                <div class="card-body d-flex flex-column"> 
-                    <p class="card-text"><%= post.content %></p>
-                    <% if(post.User && post.User.Profile) { %>
-                        <p class="card-text">
-                            <small class="text-muted">
-                                Posted by <%= post.User.Profile.name %> <br>
-                                <%= formattedDate(post.createdAt) %>
-                            </small>
-                        </p>
-                    <% } %>
-                  
-				    <a href="/posts/YourPost/<%= userId %>/<%= post.id %>/edit" class="btn-custom" >Edit Post</a>
-                    <a href="/posts/YourPost/<%= userId %>/<%= post.id %>/delete" class="btn-custom">Delete Post</a>
+	<h2 class="text-center mb-4">All Posts</h2>
+	<div class="row">
+		<% dataPost.forEach(post => { %>
 
-                </div>
+		<div class="col-md-4 mb-4">
+			<div class="card shadow-sm h-100">
+				<% if (post.imageUrl) { %>
+				<img
+					src="/<%= post.imageUrl %>"
+					class="card-img-top"
+					alt="Post Image" />
+				<% } %>
+				<div class="card-body d-flex flex-column">
+					<p class="card-text large-text"><%= post.content %></p>
+					<p class="card-text small-text">
+						<%= formattedTime(post.createdAt) %>・<%= formattedDate(post.createdAt) %>
+					</p>
+					<div class="btn-group">
+						<a
+							href="/posts/YourPost/<%= userId %>/<%= post.id %>/edit"
+							class="btn btn-custom"
+							>Edit Post</a
+						>
+						<a
+							href="/posts/YourPost/<%= userId %>/<%= post.id %>/delete"
+							class="btn btn-custom"
+							>Delete Post</a
+						>
+					</div>
+				</div>
 
-                <div class="row mt-4">
-                    <div class="col-md-6">
-                        <form action="/posts/<%= post.id %>/tag" method="post">
-                            <div class="form-group">
-                                <label for="tagInput">Add a Tag:</label>
-                                <input type="text" name="tag" class="form-control" id="tagInput" placeholder="Enter a tag">
-                            </div>
-                            <button type="submit" class="btn btn-primary mt-3">Submit</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <% }) %>
-    </div>
-
+				<div class="row mt-3 mx-2 mb-4">
+					<div class="col-md-6">
+						<form action="/posts/<%= post.id %>/tag" method="post">
+							<div class="form-group">
+								<label for="tagInput">Add a Tag:</label>
+								<input
+									type="text"
+									name="tag"
+									class="form-control"
+									id="tagInput"
+									placeholder="Enter a tag" />
+							</div>
+							<button type="submit" class="btn btn-primary mt-3">Submit</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<% }) %>
+	</div>
 </div>
 
 <%- include('partials/Footer') %>
