@@ -22,17 +22,24 @@ Here are the available routes in the **WeBubble** application, categorized for e
 - **Create an Account:**
 
   - **`GET /users/create`**: Show the create account page
-  - **`POST /users/create`**: Create a new account
+  - **`POST /users/create`**: Create a new account / register
 
 ### **Profile Management**
 
-- **Create Profile Post:**
+- **Create Profile:**
 
-  - **`GET /users/:UserId/profile/create`**: Show the create new post form for a specific user
-  - **`POST /users/:UserId/profile/create`**: Create a new post for a specific user
+  - **`GET /users/:UserId/profile/create`**: Show the create new profile form for a specific user
+  - **`POST /users/:UserId/profile/create`**: Create a new profile for a specific user
 
-- **View Profile:**
-  - **`GET /users/:UserId/profile/:ProfileId`**: Retrieve a specific user profile
+- **Edit Profile:**
+
+  - **`GET /users/:UserId/profile/edit`**: Show the edit profile form for a specific user
+  - **`POST /users/:UserId/profile/edit`**: Edit profile for a specific user
+
+- **View User(s):**
+  - **`GET /users`**: Retrieve all users
+  - **`GET /profile`**: Show the profile management
+  - **`GET /users/:UserId/profile`**: Retrieve a specific user profile
 
 ### **Post Management**
 
@@ -40,22 +47,26 @@ Here are the available routes in the **WeBubble** application, categorized for e
 
   - **`GET /posts`**: Retrieve all posts
 
+- **Retrieve a Specific Post:**
+
+  - **`GET /posts/:PostId`**: Retrieve a specific post by ID
+
+- **Retrieve User's Posts:**
+
+  - **`GET /posts/YourPost/:UserId`**: Retrieve logged in user's posts
+
 - **Create a New Post:**
 
   - **`GET /users/:UserId/posts/create`**: Show the create new post form for a specific user
   - **`POST /users/:UserId/posts/create`**: Create a new post for a specific user
 
-- **Retrieve a Specific Post:**
+- **Update/Edit Post:**
 
-  - **`GET /posts/:PostId`**: Retrieve a specific post by ID
-
-- **Update Post:**
-
-  - **`GET /posts/:PostId/edit`**: Show the update post form
-  - **`POST /posts/:PostId/edit`**: Update the post content
+  - **`GET /posts/YourPost/:UserId/:PostId/edit`**: Show the update post form
+  - **`POST /posts/YourPost/:UserId/:PostId/edit`**: Update the post content
 
 - **Delete Post:**
-  - **`GET /posts/:PostId/delete`**: Delete a post
+  - **`GET /posts/YourPost/:UserId/:PostId/delete`**: Delete a post
 
 ### **Tag Management**
 
