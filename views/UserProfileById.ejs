@@ -64,7 +64,7 @@
 	<div class="text-center">
 		<a
 			href="/users/<%= dataProfile.User.id %>/profile/edit"
-			class="btn btn-info"
+			class="btn btn-info mb-4"
 			>Edit Profile</a
 		>
 	</div>
@@ -72,6 +72,7 @@
 
 	<h4 class="mb-4"><%= dataProfile.name %>'s Posts</h4>
 	<div class="row justify-content-start">
+		<% dataProfile.User.Posts.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)); %>
 		<% if (dataProfile.User && dataProfile.User.Posts &&
 		dataProfile.User.Posts.length > 0) { %> <%
 		dataProfile.User.Posts.forEach(post => { %>

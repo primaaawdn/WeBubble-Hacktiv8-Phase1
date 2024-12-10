@@ -2,11 +2,11 @@
 <%- include('partials/NavBar') %>
 
 <div class="container my-4">
-    <h3 class="text-center mb-4">Are you ready to tell your stories, <%= userData.username %>?</h3>
+    <h3 class="text-center mb-4">Are you ready to tell your stories, <%= formattedText(userData.username) %>?</h3>
 
     <form action="/users/<%= userData.id %>/posts/create" method="post" enctype="multipart/form-data">
-        <div class="form-group">
-            <label for="exampleFormControlTextarea1">Write your stories here~</label>
+        <div class="form-group mb-3">
+            <label for="exampleFormControlTextarea1" class="mb-2">Write your stories here~</label>
             <textarea name="content" class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
         </div>
 
