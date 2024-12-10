@@ -74,7 +74,7 @@ class PostController {
 	static async postNewPost(req, res) {
 		const { content } = req.body;
 		const userId = req.session.userId;
-		const imageUrl = req.file ? `uploads/${req.file.filename}` : null;
+		const imageUrl = req.file ? req.file.path : null;
 
 		if (content.length > 280) {
 			return res
@@ -148,7 +148,7 @@ class PostController {
 
 	static async postEdit(req, res) {
 		const { content } = req.body;
-		const newImage = req.file ? `uploads/${req.file.filename}` : null;
+		const newImage = req.file ? req.file.path : null;
 		const userId = req.session.userId;
 		const PostId = req.params.PostId;
 

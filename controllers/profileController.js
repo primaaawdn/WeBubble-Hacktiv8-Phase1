@@ -1,5 +1,4 @@
 const { User, Profile, Post } = require("../models");
-const upload = require("../middleware/upload"); 
 const formattedDate = require("../helpers/formattedDate");
 const formattedText = require("../helpers/formattedText");
 
@@ -26,15 +25,20 @@ class ProfileController {
 					},
 				],
 			});
-			
+
 			if (!dataProfile) {
 				return res.redirect(`/users/${UserId}/profile/create`);
 			}
 
 			const loggedInUser = req.session.userId;
-			console.log(dataProfile.User.Posts);
-			
-			res.render("UserProfileById", { dataProfile, formattedDate, formattedText, loggedInUser });
+			// console.log(dataProfile.User.Posts);
+
+			res.render("UserProfileById", {
+				dataProfile,
+				formattedDate,
+				formattedText,
+				loggedInUser,
+			});
 		} catch (error) {
 			res.status(500).send(error.message);
 		}
@@ -71,7 +75,7 @@ class ProfileController {
 		try {
 			const UserId = req.session.userId;
 			const { name, gender, bio, group } = req.body;
-			const profilePicture = req.file ? `uploads/${req.file.filename}` : null;
+			const profilePicture = req.file ? req.file.path : null;
 			const joinedDate = req.body.joinedDate
 				? new Date(req.body.joinedDate)
 				: new Date();
@@ -117,7 +121,7 @@ class ProfileController {
 			const userProfile = await Profile.findOne({ where: { UserId } });
 
 			const profilePicture = req.file
-				? `uploads/${req.file.filename}`
+				? req.file.path
 				: userProfile.profilePicture;
 
 			const updatedFields = {
