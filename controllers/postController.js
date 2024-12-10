@@ -75,6 +75,13 @@ class PostController {
 		const { content } = req.body;
 		const userId = req.session.userId;
 		const imageUrl = req.file ? `uploads/${req.file.filename}` : null;
+
+		if (content.length > 280) {
+			return res
+				.status(400)
+				.send("Content must be less than or equal to 280 characters.");
+		}
+
 		try {
 			await Post.create({
 				UserId: userId,
@@ -87,7 +94,7 @@ class PostController {
 				let errors = error.errors.map((e) => e.message);
 				res.status(400).send(errors);
 			} else {
-				res.status(500).send("there's an error in our end");
+				res.status(500).send("There's an error on our end.");
 			}
 		}
 	}
@@ -99,7 +106,12 @@ class PostController {
 				where: { UserId: userId },
 				order: [["createdAt", "DESC"]],
 			});
-			res.render("YourPost", { userId, dataPost, formattedDate, formattedTime });
+			res.render("YourPost", {
+				userId,
+				dataPost,
+				formattedDate,
+				formattedTime,
+			});
 		} catch (error) {
 			res.status(500).send(error.message);
 		}
@@ -123,7 +135,12 @@ class PostController {
 				],
 			});
 			// console.log(userData.User.dataValues.username);
-			res.render("EditPost", { userData, formattedDate, formattedTime, formattedText });
+			res.render("EditPost", {
+				userData,
+				formattedDate,
+				formattedTime,
+				formattedText,
+			});
 		} catch (error) {
 			res.status(500).send(error.message);
 		}

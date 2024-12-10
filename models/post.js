@@ -49,6 +49,10 @@ module.exports = (sequelize, DataTypes) => {
         },
         notNull: {
           msg: "Tell us your stories!"
+        },
+        len: {
+          args: [0, 280],
+          msg: "Content must be less than or equal to 280 characters."
         }
       }
     },
