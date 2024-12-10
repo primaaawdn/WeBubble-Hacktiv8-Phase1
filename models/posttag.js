@@ -7,22 +7,19 @@ module.exports = (sequelize, DataTypes) => {
      * Define associations between models.
      */
     static associate(models) {
-      // Relationship with Post
       PostTag.belongsTo(models.Post, { foreignKey: 'PostId', as: 'Post' });
 
-      // Relationship with Tag
       PostTag.belongsTo(models.Tag, { foreignKey: 'TagsId', as: 'Tag' });
     }
   }
 
-  // Initialize PostTag model
   PostTag.init(
     {
       PostId: {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
-          model: 'Posts', // References the Posts table
+          model: 'Posts', 
           key: 'id',
         },
         onUpdate: 'CASCADE',
@@ -32,7 +29,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
-          model: 'Tags', // References the Tags table
+          model: 'Tags', 
           key: 'id',
         },
         onUpdate: 'CASCADE',
@@ -52,8 +49,8 @@ module.exports = (sequelize, DataTypes) => {
     {
       sequelize,
       modelName: 'PostTag',
-      tableName: 'PostTags', // Explicitly set table name
-      timestamps: true, // Enables automatic handling of createdAt and updatedAt
+      tableName: 'PostTags',
+      timestamps: true, 
     }
   );
 

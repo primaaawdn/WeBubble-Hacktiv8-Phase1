@@ -4,18 +4,128 @@
 <style>
     .card {
         transition: transform 0.3s ease, box-shadow 0.3s ease;
+        padding: 1rem;
+        min-width: 260px;
+        max-width: 320px;
+        border-radius: 12px;
+        background-color: #ffffff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
     }
 
     .card:hover {
-        transform: translateY(-5px); 
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); 
+        transform: translateY(-5px);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .card img {
+        width: 80px;
+        height: 80px;
+        object-fit: cover;
+        border-radius: 50%;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .card h5 {
+        font-size: 1rem;
+        margin: 0;
+        font-weight: bold;
+    }
+
+    .card p {
+        font-size: 0.85rem;
+        color: #666;
+        margin-bottom: 0;
+    }
+
+    .text-truncate {
+        max-width: 200px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .container {
+        max-width: 1200px;
+    }
+
+    @media (max-width: 1200px) {
+        .card {
+            max-width: 280px;
+            align-items: center;
+        }
+    }
+
+    @media (max-width: 992px) {
+        .card {
+            max-width: 260px;
+            align-items: center;
+        }
+    }
+
+    .form-inline {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .input-group {
+        width: 100%;
+    }
+
+    .input-group-append button {
+        padding: 0.5rem 1rem;
+    }
+
+    @media (max-width: 768px) {
+        .d-flex {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .form-inline {
+            width: 100%;
+        }
+
+        .col-md-4 {
+            width: 100%;
+        }
+
+        .col-sm-6 {
+            width: 100%;
+        }
+
+        .container {
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .card h5 {
+            font-size: 0.9rem;
+        }
+
+        .card p {
+            font-size: 0.8rem;
+        }
+
+        .input-group input {
+            font-size: 0.85rem;
+        }
+
+        .input-group-append button {
+            font-size: 0.85rem;
+        }
     }
 </style>
 
 <div class="container my-4">
     <h2 class="mb-4">Talents and Managers</h2>
 
-    <div class="d-flex justify-content-start mb-4">
+    <div class="d-flex justify-content-start mb-4 gap-2">
         <form action="/users" method="GET" class="form-inline">
             <select name="role" class="form-control mr-2" onchange="this.form.submit()">
                 <option value="">All</option>
@@ -24,7 +134,7 @@
             </select>
         </form>
 
-        <form action="/users" method="GET" class="form-inline mr-3">
+        <form action="/users" method="GET" class="form-inline mr-3 gap-2">
             <div class="input-group">
                 <input type="text" name="search" placeholder="Search Users..." class="form-control">
                 <div class="input-group-append">
@@ -33,24 +143,23 @@
             </div>
         </form>
     </div>
-    
-    <div class="row justify-content-start mx-auto" style="max-width: 900px;">
+
+    <div class="row">
         <% dataUser.forEach(user => { %>
-            <div class="col-md-4 mb-3">
-                <div class="card shadow-sm d-flex align-items-center p-2" style="flex-direction: row; border: none;">
-                    <% if (user.profilePicture) { %>
-                        <img src="<%= user.profilePicture %>" class="rounded-circle" alt="Profile Picture" style="width: 75px; height: 75px; object-fit: cover; margin-right: 15px;">
-                    <% } else { %>
-                        <img src="/images/default-profile.png" class="rounded-circle" alt="Default Profile Picture" style="width: 75px; height: 75px; object-fit: cover; margin-right: 15px;">
-                    <% } %>
-                    <div class="flex-grow-1">
-                        <h5 class="mb-1 text-truncate" style="max-width: 200px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-                            <%= user.name %>
-                        </h5>
-                        <p class="mb-1"><%= user.group %></p>
-                        <a href="/users/<%= user.UserId %>/profile" class="btn btn-outline-info btn-sm px-1 py-0" style="font-size: 0.7rem;">Detail</a>
+            <div class="col-md-4 col-sm-6 mb-4">
+                <a href="/users/<%= user.UserId %>/profile" class="text-decoration-none">
+                    <div class="card shadow-sm">
+                        <% if (user.profilePicture) { %>
+                            <img src="<%= user.profilePicture %>" alt="<%= user.name %>'s Profile Picture">
+                        <% } else { %>
+                            <img src="/images/default-profile.png" alt="Default Profile Picture">
+                        <% } %>
+                        <div>
+                            <h5 class="text-truncate mt-2"><%= user.name %></h5>
+                            <p><%= user.group %></p>
+                        </div>
                     </div>
-                </div>
+                </a>
             </div>
         <% }) %>
     </div>

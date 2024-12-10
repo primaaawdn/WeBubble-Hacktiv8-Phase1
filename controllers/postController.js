@@ -2,204 +2,204 @@ const { Post, User, Profile } = require("../models");
 const formattedDate = require("../helpers/formattedDate");
 const fs = require("fs");
 const path = require("path");
+const formattedTime = require("../helpers/formattedTime");
+const formattedText = require("../helpers/formattedText");
 
 class PostController {
-  static async getPost(req, res) {
-    try {
-      const userId = req.session.userId;
-      const dataPost = await Post.findAll({
-        include: [
-          {
-            model: User,
-            attributes: ["username"],
-            include: [
-              {
-                model: Profile,
-                attributes: ["name"],
-              },
-            ],
-          },
-        ],
-        order: [["createdAt", "DESC"]],
-      });
-      const totalPosts = await Post.countTotalPosts();
-      res.render("Post", { dataPost, userId, formattedDate, totalPosts });
-    } catch (error) {
-      res.send(error);
-    }
-  }
-  static async ViewPost(req, res) {
-    const { PostId } = req.params;
-    try {
-      const dataPost = await Post.findByPk(PostId, {
-        include: [
-          {
-            model: User,
-            attributes: ["username"],
-            include: [
-              {
-                model: Profile,
-                attributes: ["name"],
-              },
-            ],
-          },
-        ],
-      });
+	static async getPost(req, res) {
+		try {
+			const userId = req.session.userId;
+			const dataPost = await Post.findAll({
+				include: [
+					{
+						model: User,
+						attributes: ["username"],
+						include: [
+							{
+								model: Profile,
+								attributes: ["name", "profilePicture"],
+							},
+						],
+					},
+				],
+				order: [["createdAt", "DESC"]],
+			});
 
-      // console.log(dataPost);
-      res.render("PostId", { dataPost, formattedDate });
-    } catch (error) {
-      res.send(error.message);
-    }
-  }
-  static async createPost(req, res) {
-    try {
-      const userId = req.session.userId;
-      const userData = await User.findOne({
-        where: { id: userId },
-      });
+			const totalPosts = await Post.countTotalPosts();
+			res.render("Post", { dataPost, userId, formattedDate, totalPosts });
+		} catch (error) {
+			res.send(error);
+		}
+	}
+	static async ViewPost(req, res) {
+		const { PostId } = req.params;
+		try {
+			const dataPost = await Post.findByPk(PostId, {
+				include: [
+					{
+						model: User,
+						attributes: ["username"],
+						include: [
+							{
+								model: Profile,
+								attributes: ["name", "profilePicture"],
+							},
+						],
+					},
+				],
+			});
 
-      if (!userData) {
-        return res.status(404).send("User not found");
-      }
-      res.render("newPost", { userData });
-    } catch (error) {
-      res.status(500).send(error.message);
-    }
-  }
+			// console.log(dataPost);
+			res.render("PostId", { dataPost, formattedDate, formattedTime });
+		} catch (error) {
+			res.send(error.message);
+		}
+	}
+	static async createPost(req, res) {
+		try {
+			const userId = req.session.userId;
+			const userData = await User.findOne({
+				where: { id: userId },
+			});
 
-  static async postNewPost(req, res) {
-    const { content } = req.body;
-    const userId = req.session.userId;
-    const imageUrl = req.file ? `uploads/${req.file.filename}` : null;
-    try {
-      await Post.create({
-        UserId: userId,
-        content,
-        imageUrl,
-      });
-      res.redirect("/posts");
-    } catch (error) {
-      if (error.name === "SequelizeValidationError") {
-        let errors = error.errors.map((e) => e.message);
-        res.status(400).send(errors);
-      } else {
-        res.status(500).send("there's an error in our end");
-      }
-    }
-  }
+			if (!userData) {
+				return res.status(404).send("User not found");
+			}
+			res.render("newPost", { userData });
+		} catch (error) {
+			res.status(500).send(error.message);
+		}
+	}
 
-  static async YourPost(req, res) {
-    try {
-      const userId = req.session.userId;
-      const dataPost = await Post.findAll({
-        where: { UserId: userId },
-        order: [["createdAt", "DESC"]],
-      });
-      res.render("YourPost", { userId, dataPost, formattedDate });
-    } catch (error) {
-      res.status(500).send(error.message);
-    }
-  }
+	static async postNewPost(req, res) {
+		const { content } = req.body;
+		const userId = req.session.userId;
+		const imageUrl = req.file ? `uploads/${req.file.filename}` : null;
+		try {
+			await Post.create({
+				UserId: userId,
+				content,
+				imageUrl,
+			});
+			res.redirect("/posts");
+		} catch (error) {
+			if (error.name === "SequelizeValidationError") {
+				let errors = error.errors.map((e) => e.message);
+				res.status(400).send(errors);
+			} else {
+				res.status(500).send("there's an error in our end");
+			}
+		}
+	}
 
-  static async getEdit(req, res) {
-    const PostId = req.params.PostId;
-    try {
-      const userData = await Post.findByPk(PostId, {
-        include: [
-          {
-            model: User,
-            attributes: ["username"],
-            include: [
-              {
-                model: Profile,
-                attributes: ["name"],
-              },
-            ],
-          },
-        ],
-      });
-      // console.log(userData.User.dataValues.username);
-      res.render("EditPost", { userData });
-    } catch (error) {
-      res.status(500).send(error.message);
-    }
-  }
+	static async YourPost(req, res) {
+		try {
+			const userId = req.session.userId;
+			const dataPost = await Post.findAll({
+				where: { UserId: userId },
+				order: [["createdAt", "DESC"]],
+			});
+			res.render("YourPost", { userId, dataPost, formattedDate, formattedTime });
+		} catch (error) {
+			res.status(500).send(error.message);
+		}
+	}
 
-  static async postEdit(req, res) {
-    const { content } = req.body;
-    const newImage = req.file ? `uploads/${req.file.filename}` : null; 
-    const userId = req.session.userId;
-    const PostId = req.params.PostId;
+	static async getEdit(req, res) {
+		const PostId = req.params.PostId;
+		try {
+			const userData = await Post.findByPk(PostId, {
+				include: [
+					{
+						model: User,
+						attributes: ["username"],
+						include: [
+							{
+								model: Profile,
+								attributes: ["name"],
+							},
+						],
+					},
+				],
+			});
+			// console.log(userData.User.dataValues.username);
+			res.render("EditPost", { userData, formattedDate, formattedTime, formattedText });
+		} catch (error) {
+			res.status(500).send(error.message);
+		}
+	}
 
-    try {
-     
-      const post = await Post.findOne({
-        where: { id: PostId },
-      });
+	static async postEdit(req, res) {
+		const { content } = req.body;
+		const newImage = req.file ? `uploads/${req.file.filename}` : null;
+		const userId = req.session.userId;
+		const PostId = req.params.PostId;
 
-      if (!post) {
-        return res.status(404).send("Post not found");
-      }
+		try {
+			const post = await Post.findOne({
+				where: { id: PostId },
+			});
 
-    
-      if (newImage && post.imageUrl) {
-        const oldImagePath = path.join(__dirname, "../", post.imageUrl);
-        fs.unlink(oldImagePath, (err) => {
-          if (err) {
-            console.error("Error deleting old file:", err.message);
-          }
-        });
-      }
+			if (!post) {
+				return res.status(404).send("Post not found");
+			}
 
-      
-      await Post.update(
-        {
-          content,
-          imageUrl: newImage || post.imageUrl, 
-        },
-        {
-          where: { id: PostId, UserId: userId }, 
-        }
-      );
+			if (newImage && post.imageUrl) {
+				const oldImagePath = path.join(__dirname, "../", post.imageUrl);
+				fs.unlink(oldImagePath, (err) => {
+					if (err) {
+						console.error("Error deleting old file:", err.message);
+					}
+				});
+			}
 
-      res.redirect(`/posts/YourPost/${userId}`);
-    } catch (error) {
-      res.status(500).send(error.message);
-    }
-  }
+			await Post.update(
+				{
+					content,
+					imageUrl: newImage || post.imageUrl,
+				},
+				{
+					where: { id: PostId, UserId: userId },
+				}
+			);
 
-  static async removePost(req, res) {
-    const userId = req.session.userId;
-    const PostId = req.params.PostId;
+			res.redirect(`/posts/YourPost/${userId}`);
+		} catch (error) {
+			res.status(500).send(error.message);
+		}
+	}
 
-    try {
-      const post = await Post.findOne({
-        where: { id: PostId },
-      });
+	static async removePost(req, res) {
+		const userId = req.session.userId;
+		const PostId = req.params.PostId;
 
-      if (!post) {
-        return res.status(404).send("Post not found");
-      }
+		try {
+			const post = await Post.findOne({
+				where: { id: PostId },
+			});
 
-      if (post.imageUrl) {
-        const filePath = path.join(__dirname, "../", post.imageUrl);
-        fs.unlink(filePath, (err) => {
-          if (err) {
-            console.error("Error deleting file:", err.message);
-          }
-        });
-      }
+			if (!post) {
+				return res.status(404).send("Post not found");
+			}
 
-      await Post.destroy({
-        where: { id: PostId },
-      });
+			if (post.imageUrl) {
+				const filePath = path.join(__dirname, "../", post.imageUrl);
+				fs.unlink(filePath, (err) => {
+					if (err) {
+						console.error("Error deleting file:", err.message);
+					}
+				});
+			}
 
-      res.redirect(`/posts/YourPost/${userId}`);
-    } catch (error) {
-      res.status(500).send(error.message);
-    }
-  }
+			await Post.destroy({
+				where: { id: PostId },
+			});
+
+			res.redirect(`/posts/YourPost/${userId}`);
+		} catch (error) {
+			res.status(500).send(error.message);
+		}
+	}
 }
 
 module.exports = PostController;
