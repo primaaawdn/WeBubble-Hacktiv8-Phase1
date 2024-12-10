@@ -65,7 +65,7 @@ class PostController {
 			if (!userData) {
 				return res.status(404).send("User not found");
 			}
-			res.render("newPost", { userData });
+			res.render("newPost", { userData, formattedText });
 		} catch (error) {
 			res.status(500).send(error.message);
 		}

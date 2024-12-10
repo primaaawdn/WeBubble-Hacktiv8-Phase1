@@ -20,6 +20,7 @@ class ProfileController {
 								model: Post,
 								as: "Posts",
 								attributes: ["id", "imageUrl", "content", "createdAt"],
+								order: [["createdAt", "DESC"]],
 							},
 						],
 					},
@@ -31,6 +32,8 @@ class ProfileController {
 			}
 
 			const loggedInUser = req.session.userId;
+			console.log(dataProfile.User.Posts);
+			
 			res.render("UserProfileById", { dataProfile, formattedDate, formattedText, loggedInUser });
 		} catch (error) {
 			res.status(500).send(error.message);
