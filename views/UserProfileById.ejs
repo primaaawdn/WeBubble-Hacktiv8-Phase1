@@ -4,16 +4,73 @@
 	.card:hover {
 		transform: scale(1.05);
 	}
+
 	.card-text {
 		color: #333;
+	}
+
+	.container-profile-post {
+		display: flex;
+		justify-content: space-between;
+	}
+
+	.profile-section {
+		width: 30%;
+	}
+
+	.posts-section {
+		width: 65%;
+		max-height: auto;
+		overflow-y: auto;
+		padding-top: 20px;
+	}
+
+	.posts-section h4 {
+		margin-bottom: 20px;
+	}
+
+	.posts-container {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: flex-start;
+		gap: 15px;
+	}
+
+	.post-card {
+		width: 45%;
+		margin-bottom: 15px;
+		height: auto;
+	}
+
+	.card {
+		margin-bottom: 15px;
+	}
+
+	.card-text {
+		color: #333;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		line-height: 1.5em;
+		max-height: 1.5em;
+		display: block;
+		white-space: nowrap;
+	}
+
+	.posts-container:empty {
+		display: none;
+	}
+
+	@media (min-width: 768px) {
+		.post-card {
+			width: 30%;
+		}
 	}
 </style>
 
 <div class="container my-4">
-	<h2 class="text-center mb-4"><%= dataProfile.name %></h2>
-
-	<div class="row justify-content-center mb-4">
-		<div class="col-md-4">
+	<div class="container-profile-post">
+		<div class="profile-section">
+			<h2 class="text-center mb-4"><%= dataProfile.name %></h2>
 			<div class="card shadow-sm text-center">
 				<% if (dataProfile.dataValues.profilePicture) { %>
 				<img
@@ -38,66 +95,71 @@
 						margin: 15px auto;
 					" />
 				<% } %>
-				<div class="card-body">
+				<div class="mt-2 mb-2">
 					<p class="card-text">
+						"<%= dataProfile.bio || 'No bio available' %>"
+					</p>
+				</div>
+				<div class="card-body mt-2 mb-2">
+					<p class="card-text mb-1">
 						<strong>Role:</strong> <%= formattedText(dataProfile.User.role) %>
 					</p>
-					<p class="card-text">
+					<p class="card-text mb-1">
 						<strong>Gender:</strong> <%= dataProfile.gender %>
 					</p>
-					<p class="card-text">
+					<p class="card-text mb-1">
 						<strong>Group:</strong> <%= dataProfile.group %>
 					</p>
-					<p class="card-text">
+					<p class="card-text mb-1">
 						<strong>Joined:</strong> <%= formattedDate(dataProfile.joinedDate)
 						%>
 					</p>
-					<p class="card-text">
-						<strong>Bio:</strong> <%= dataProfile.bio || 'No bio available' %>
-					</p>
 				</div>
 			</div>
+			<% if (loggedInUser && loggedInUser === dataProfile.User.id) { %>
+			<div class="text-center">
+				<a
+					href="/users/<%= dataProfile.User.id %>/profile/edit"
+					class="btn btn-info mb-4"
+					>Edit Profile</a
+				>
+			</div>
+			<% } %>
 		</div>
-	</div>
 
-	<% if (loggedInUser && loggedInUser === dataProfile.User.id) { %>
-	<div class="text-center">
-		<a
-			href="/users/<%= dataProfile.User.id %>/profile/edit"
-			class="btn btn-info mb-4"
-			>Edit Profile</a
-		>
-	</div>
-	<% } %>
-
-	<h4 class="mb-4"><%= dataProfile.name %>'s Posts</h4>
-	<div class="row justify-content-start">
-		<% dataProfile.User.Posts.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)); %>
-		<% if (dataProfile.User && dataProfile.User.Posts &&
-		dataProfile.User.Posts.length > 0) { %> <%
-		dataProfile.User.Posts.forEach(post => { %>
-		<div class="col-md-4 mb-3">
-			<a href="/posts/<%= post.id %>">
-				<div class="card shadow-sm">
-					<div class="card-body">
-						<img
-							src="/<%= post.imageUrl %>"
-							class="card-img-top"
-							alt="Post Image"
-							style="object-fit: cover; height: 200px" />
-						<p class="card-text"><%= post.content %></p>
-						<p class="card-text">
-							<small class="text-muted"
-								><%= formattedDate(post.createdAt) %></small
-							>
-						</p>
+		<div class="posts-section">
+			<div>
+				<% dataProfile.User.Posts.sort((a, b) => new Date(b.createdAt) - new
+				Date(a.createdAt)); %> <% if (dataProfile.User && dataProfile.User.Posts
+				&& dataProfile.User.Posts.length > 0) { %>
+				<div class="posts-container">
+					<% dataProfile.User.Posts.forEach(post => { %>
+					<div class="post-card">
+						<a href="/posts/<%= post.id %>">
+							<div class="card shadow-sm">
+								<div class="card-body">
+									<img
+										src="/<%= post.imageUrl %>"
+										class="card-img-top"
+										alt="Post Image"
+										style="object-fit: cover; height: 200px" />
+									<p class="card-text"><%= post.content %></p>
+									<p class="card-text">
+										<small class="text-muted"
+											><%= formattedDate(post.createdAt) %></small
+										>
+									</p>
+								</div>
+							</div>
+						</a>
 					</div>
+					<% }) %>
 				</div>
-			</a>
+				<% } else { %>
+				<p>No post has been made.</p>
+				<% } %>
+			</div>
 		</div>
-		<% }) %> <% } else { %>
-		<p>No post has been made.</p>
-		<% } %>
 	</div>
 </div>
 

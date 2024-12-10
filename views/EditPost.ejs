@@ -17,8 +17,8 @@
 				name="content"
 				class="form-control"
 				id="exampleFormControlTextarea1"
-				rows="5"> <%= userData.content %>
-                </textarea>
+				rows="5"
+				maxlength="280"><%= userData.content %></textarea>
 			<h6 class="card-subtitle text-muted mt-2">
 				Posted by <%= userData.User.Profile.name %> (<%=
 				userData.User.dataValues.username %>) on <%=
