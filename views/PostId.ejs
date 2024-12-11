@@ -40,6 +40,15 @@
 						" />
 					<% } %>
 
+					<% if (dataPost.PostTags && dataPost.PostTags.length > 0) { %>
+						<p class="card-text small-text">
+							Tags:
+							<% dataPost.PostTags.forEach(postTag => { %>
+								<span class="badge bg-info"><%= postTag.Tag.tag %></span>
+							<% }); %>
+						</p>
+					<% } %>
+
 					<div class="d-flex flex-column flex-md-row justify-content-between align-items-center text-muted">
 						<p class="mb-0"><%= formattedTime(dataPost.createdAt) %>・<%= formattedDate(dataPost.createdAt) %></p>
 					</div>
