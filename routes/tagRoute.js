@@ -13,6 +13,7 @@ router.use(function (req, res, next) {
 
 router.post("/tags", TagController.getTag)
 router.post("/posts/:PostId/tag", TagController.addNewTag);
+router.get('/posts/:PostId/tag', TagController.getTagsByPostId)
 
 
 module.exports = router;
