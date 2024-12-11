@@ -101,6 +101,19 @@
             padding-left: 15px;
             padding-right: 15px;
         }
+
+        /* Menyesuaikan .row untuk layar kecil agar card berada di tengah */
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center; /* Menyusun card di tengah */
+        }
+
+        .col-md-4, .col-sm-6 {
+            display: flex;
+            justify-content: center; /* Card berada di tengah dalam kolom */
+            flex: 1;
+        }
     }
 
     @media (max-width: 576px) {
