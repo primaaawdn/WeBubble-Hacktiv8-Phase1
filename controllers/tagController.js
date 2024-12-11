@@ -11,27 +11,7 @@ class TagController {
     }
   }
 
-  static async getTagsByPostId(req, res) {
-
-    const { PostId } = req.params;  
   
-    try {
-    
-      const dataTag = await Tag.findAll({
-       
-          where: { PostId },  
-        
-      });
-
-      console.log(dataTag)
-  
-      res.send({ dataTag });
-  
-    } catch (error) {
-      console.log(error);
-      res.status(500).send({ message: error.message });
-    }
-  }
   
 
   static async addNewTag(req, res) {
@@ -46,7 +26,7 @@ class TagController {
         TagsId: newTag.id 
       });
       
-      res.redirect(`/posts/${PostId}/tag`);
+      res.redirect(`/posts/YourPost/${UserId}`);
 
     } catch (error) {
       console.error(error);
