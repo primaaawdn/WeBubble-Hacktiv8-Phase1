@@ -61,12 +61,24 @@
     }
 </style>
 
+
+
+
+  
+
 <div class="container my-4">
     <div class="row header-btn-row">
         <div class="col-md-4">
             <a href="/posts/YourPost/<%= userId %>" class="btn-custom">Your Post</a>
         </div>
     </div>
+
+    <% if (isProfileComplete === false) { %>
+        <p class="alert alert-warning">
+            Please complete your profile before posting. 
+            <a href="/profile/update">Update your profile</a>
+        </p>
+    <% } %>
 
     <div class="row">
         <% dataPost.forEach(post => { %>
