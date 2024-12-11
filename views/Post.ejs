@@ -76,7 +76,17 @@
                 <img src="<%= post.imageUrl %>" class="card-img-top" alt="Post Image" />
                 <% } %>
                 <div class="card-body">
-                    <p class="card-text bio-text"><%= post.content %></p>
+                    <p class="card-text"><%= post.content %></p>
+
+                    <% if (post.PostTags && post.PostTags.length > 0) { %>
+						<p class="card-text small-text">
+							Tags:
+							<% post.PostTags.slice(0, 5).forEach(postTag => { %>
+								<span class="badge bg-info"><%= postTag.Tag.tag %></span>
+							<% }); %>
+						</p>
+					<% } %>
+
                     <% if(post.User && post.User.Profile) { %>
                         <p class="card-text">
                             <small class="text-muted">
