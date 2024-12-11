@@ -3,6 +3,7 @@ const express = require("express");
 const router = express.Router();
 const PostController = require("../controllers/postController");
 const upload = require("../middleware/upload");
+const ensureAuthenticated = require("../middleware/profileAuthen");
 
 router.use((req, res, next) => {
     if (!req.session.userId) {
@@ -16,7 +17,7 @@ router.use((req, res, next) => {
 
 router.get("/posts", PostController.getPost);
 router.get("/posts/:PostId", PostController.ViewPost);
-router.get("/users/:UserId/posts/create", PostController.createPost);
+router.get("/users/:UserId/posts/create", ensureAuthenticated,PostController.createPost);
 router.post("/users/:UserId/posts/create", upload.single('imageUrl'), PostController.postNewPost);
 router.get("/posts/YourPost/:UserId", PostController.YourPost);
 router.get("/posts/YourPost/:UserId/:PostId/edit", PostController.getEdit);

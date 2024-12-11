@@ -10,6 +10,15 @@ class PostController {
   static async getPost(req, res) {
     try {
       const userId = req.session.userId;
+
+      console.log("isProfileComplete:", req.session.isProfileComplete);
+
+
+      const isProfileComplete = req.session.isProfileComplete;
+      if (!isProfileComplete) {
+        return res.redirect("/users/:UserId/profile/create"); 
+       }
+
       const dataPost = await Post.findAll({
         include: [
           {
@@ -38,7 +47,7 @@ class PostController {
       });
 
       const totalPosts = await Post.countTotalPosts();
-      res.render("Post", { dataPost, userId, formattedDate, totalPosts });
+      res.render("Post", { dataPost, userId, formattedDate, totalPosts, isProfileComplete });
     } catch (error) {
       res.send(error);
     }
