@@ -174,7 +174,7 @@
 			confirmButtonText: "Yes, delete tag!",
 		}).then((result) => {
 			if (result.isConfirmed) {
-				window.location.href = `/posts/<%= userId %>/${postId}/tag/${tagId}/delete`;
+				window.location.href = `/posts/${postId}/tag/${tagId}/delete`;
 			}
 		});
 	}
