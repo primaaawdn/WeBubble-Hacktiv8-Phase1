@@ -11,6 +11,9 @@ class TagController {
     }
   }
 
+  
+  
+
   static async addNewTag(req, res) {
     const { tag } = req.body; 
     const PostId = req.params.PostId; 
@@ -23,7 +26,7 @@ class TagController {
         TagsId: newTag.id 
       });
       
-      res.redirect(`/posts/${PostId}/tag`, {newPostTag}); 
+      res.redirect(`/posts/YourPost/${UserId}`);
 
     } catch (error) {
       console.error(error);

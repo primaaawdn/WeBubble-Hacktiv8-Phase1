@@ -1,9 +1,10 @@
-const { Post, User, Profile } = require("../models");
+const { Post, User, Profile, PostTag, Tag } = require("../models");
 const formattedDate = require("../helpers/formattedDate");
 const fs = require("fs");
 const path = require("path");
 const formattedTime = require("../helpers/formattedTime");
 const formattedText = require("../helpers/formattedText");
+const posttag = require("../models/posttag");
 
 class PostController {
 	static async getPost(req, res) {
@@ -104,8 +105,24 @@ class PostController {
 			const userId = req.session.userId;
 			const dataPost = await Post.findAll({
 				where: { UserId: userId },
+				include: [
+					{
+						model: PostTag,
+						attributes: ["TagsId"],
+						include: [
+							{
+								model: Tag,
+								as: "Tag",
+								attributes: ["tag"]
+							},
+						],
+					},
+				],
 				order: [["createdAt", "DESC"]],
 			});
+
+			// console.log(dataPost);
+
 			res.render("YourPost", {
 				userId,
 				dataPost,
