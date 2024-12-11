@@ -94,10 +94,19 @@
 						<p class="card-text small-text">
 							Tags:
 							<% post.PostTags.forEach(postTag => { %>
-								<span class="badge bg-info"><%= postTag.Tag.tag %></span>
+								<span class="badge bg-info">
+									<%= postTag.Tag.tag %>
+									<a 
+										href="/posts/<%= post.id %>/tag/<%= postTag.TagsId %>/delete" 
+										class="text-danger ms-1" 
+										onclick="return confirm('Are you sure you want to delete this tag?')">
+										&times;
+									</a>
+								</span>
 							<% }); %>
 						</p>
 					<% } %>
+					
 					
 					<p class="card-text small-text">
 
@@ -118,21 +127,22 @@
 				</div>
 
 				<div class="row mt-3 mx-2 mb-4">
-					<div class="col-md-6">
+					<div class="col-md-9">
 						<form action="/posts/<%= post.id %>/tag" method="post">
 							<div class="form-group">
-								<label for="tagInput">Add a Tag:</label>
+								<label for="tagsInput">Add Tags:</label>
 								<input
 									type="text"
-									name="tag"
+									name="tags" 
 									class="form-control"
-									id="tagInput"
-									placeholder="Enter a tag" />
+									id="tagsInput"
+									placeholder="Enter tags, separated by commas" />
 							</div>
 							<button type="submit" class="btn btn-primary mt-3">Submit</button>
 						</form>
 					</div>
 				</div>
+				
 			</div>
 		</div>
 		<% }) %>
